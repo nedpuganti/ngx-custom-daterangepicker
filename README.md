@@ -1,4 +1,4 @@
-# NgxCustomDaterangepicker
+# NgxAdvancedDaterangepicker
 
 [![Material Advanced date range picker](screenshot.png)](https://stackblitz.com/github/naren7229/ngx-custom-daterangepicker)
 

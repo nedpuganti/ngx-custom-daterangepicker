@@ -1,24 +1,41 @@
 # NgxAdvancedDaterangepicker
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
+[![Material Advanced date range picker](screenshot.png)](https://stackblitz.com/github/naren7229/ngx-custom-daterangepicker)
 
-## Code scaffolding
 
-Run `ng generate component component-name --project ngx-advanced-daterangepicker` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-advanced-daterangepicker`.
-> Note: Don't forget to add `--project ngx-advanced-daterangepicker` or else it will be added to the default project in your `angular.json` file. 
+## It's awesome, but how to use it?
 
-## Build
+As easy as pie.
+Installation: `yarn add ngx-advanced-daterangepicker` or `npm install ngx-advanced-daterangepicker`
+Import `NgxAdvancedDaterangepickerModule`
+```
+<ngx-advanced-daterangepicker
+          [selectDays]="'today'"
+          [isoDateFormat]="true"
+          (on-change)="getDateSelection($event)"
+        ></ngx-advanced-daterangepicker>
+```
 
-Run `ng build ngx-advanced-daterangepicker` to build the project. The build artifacts will be stored in the `dist/` directory.
+Install Packages:
+```
+npm install bootstrap
+npm install @ng-bootstrap/ng-bootstrap
 
-## Publishing
+ng add @angular/material
 
-After building your library with `ng build ngx-advanced-daterangepicker`, go to the dist folder `cd dist/ngx-advanced-daterangepicker` and run `npm publish`.
+npm i saturn-datepicker
 
-## Running unit tests
+npm i moment
+npm i @angular/material-moment-adapter
+```
 
-Run `ng test ngx-advanced-daterangepicker` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Further help
+Add styles:
+```scss
+@import "~bootstrap/scss/bootstrap";
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import "~saturn-datepicker/theming";
+@import "~saturn-datepicker/bundle.css";
+```

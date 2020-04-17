@@ -1,2 +1,103 @@
-<ngx-advanced-daterangepicker [selectDays]="'thisMonth'" [isoDateFormat]="true" (on-change)="getDateSelection($event)"
-  [hideQuarter]="true"></ngx-advanced-daterangepicker>
+<section style="padding: 10px;">
+  <mat-card>
+    <mat-card-content>
+      <h2 class="example-h2">Hide Configuration</h2>
+      <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="hideWeek"
+          >Hide Week</mat-checkbox
+        >
+        <mat-checkbox class="example-margin" [(ngModel)]="hideMonth"
+          >Hide Month</mat-checkbox
+        >
+        <mat-checkbox class="example-margin" [(ngModel)]="hideQuarter"
+          >Hide Quarter</mat-checkbox
+        >
+        <mat-checkbox class="example-margin" [(ngModel)]="hideYear"
+          >Hide Year</mat-checkbox
+        >
+      </section>
+    </mat-card-content>
+  </mat-card>
+  <br />
+  <mat-card>
+    <mat-card-content>
+      <h2 class="example-h2">
+        Change Default Date
+        <button
+          mat-stroked-button
+          [color]="isoDateFormat ? 'primary' : 'accent'"
+          (click)="changeToIso()"
+        >
+          to ISO Date
+        </button>
+      </h2>
+      <br />
+      <section class="example-section">
+        <mat-radio-group
+          [(ngModel)]="selectDays"
+          (change)="changeDefaultDate()"
+        >
+          <mat-radio-button class="example-margin" [value]="'today'"
+            >Today</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'yesterday'"
+            >Yesterday</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'thisWeek'"
+            >This Week</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'last7Days'"
+            >Last 7 Days</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'thisMonth'"
+            >This Month</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'lastMonth'"
+            >Last Month</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'last30Days'"
+            >Last 30 Days</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'thisQuarter'"
+            >This Quarter</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'lastQuarter'"
+            >Last Quarter</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'last90Days'"
+            >Last 90 Days</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'last12Months'"
+            >Last 12 Months</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'lastYear'"
+            >Last Year</mat-radio-button
+          >
+          <mat-radio-button class="example-margin" [value]="'thisYear'"
+            >This Year</mat-radio-button
+          >
+        </mat-radio-group>
+      </section>
+    </mat-card-content>
+  </mat-card>
+
+  <ng-container *ngIf="!reloading">
+    <br />
+    <mat-card>
+      <mat-card-content>
+        <h2 class="example-h2">
+          Selected Date : {{ dateRange?.startDate }} - {{ dateRange?.endDate }}
+        </h2>
+        <ngx-advanced-daterangepicker
+          [selectDays]="selectDays"
+          [isoDateFormat]="isoDateFormat"
+          (on-change)="getDateSelection($event)"
+          [hideWeek]="hideWeek"
+          [hideMonth]="hideMonth"
+          [hideQuarter]="hideQuarter"
+          [hideYear]="hideYear"
+        ></ngx-advanced-daterangepicker>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</section>

@@ -7,7 +7,7 @@
 
   <div ngbDropdownMenu class="p-2 dropdown-toggle-menu">
     <div class="row">
-      <div class="col-lg-5 border-right">
+      <div class="col-lg-5 col-md-5 border-right">
         <button mat-button class="w-100 text-align-left date-button mb-1" [color]="isActive('today') ? 'primary' : ''"
           (click)="onDaySelect('today')">
           Today
@@ -76,7 +76,7 @@
           Custom
         </button>
       </div>
-      <div class="col-lg-7">
+      <div class="col-lg-7 col-md-7">
         <span class="text-muted">{{ selectedType?.display }}</span>
         <h6 class="mt-1 selected-date">
           {{ selectedDate?.begin | date }} - {{ selectedDate?.end | date }}

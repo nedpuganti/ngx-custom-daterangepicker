@@ -1,27 +1,41 @@
 # NgxCustomDaterangepicker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
+[![Material Advanced date range picker](screenshot.png)](https://stackblitz.com/github/naren7229/ngx-custom-daterangepicker)
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## It's awesome, but how to use it?
 
-## Code scaffolding
+As easy as pie.
+Installation: `yarn add ngx-advanced-daterangepicker` or `npm install ngx-advanced-daterangepicker`
+Import `NgxAdvancedDaterangepickerModule`
+```
+<ngx-advanced-daterangepicker
+          [selectDays]="'today'"
+          [isoDateFormat]="true"
+          (on-change)="getDateSelection($event)"
+        ></ngx-advanced-daterangepicker>
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Install Packages:
+```
+npm install bootstrap
+npm install @ng-bootstrap/ng-bootstrap
 
-## Build
+ng add @angular/material
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+npm i saturn-datepicker
 
-## Running unit tests
+npm i moment
+npm i @angular/material-moment-adapter
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+Add styles:
+```scss
+@import "~bootstrap/scss/bootstrap";
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+@import "~saturn-datepicker/theming";
+@import "~saturn-datepicker/bundle.css";
+```

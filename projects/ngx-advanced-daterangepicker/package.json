@@ -1,0 +1,30 @@
+{
+  "name": "ngx-advanced-daterangepicker",
+  "version": "0.1.4",
+  "author": "Naren",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naren7229/ngx-advanced-daterangepicker.git"
+  },
+  "keywords": [
+    "ng",
+    "angular",
+    "daterangepicker",
+    "advanced",
+    "library"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "@angular/common": "^9.1.11",
+    "@angular/core": "^9.1.11",
+    "@angular/localize": "^9.1.11",
+    "@angular/material": "^9.2.4",
+    "@angular/flex-layout": "^9.0.0-beta.31",
+    "@angular/material-moment-adapter": "^9.2.4",
+    "moment": "^2.26.0",
+    "saturn-datepicker": "^8.0.5"
+  }
+}

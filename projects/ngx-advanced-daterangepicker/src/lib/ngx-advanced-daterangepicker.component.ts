@@ -20,6 +20,9 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   constructor() {}
 
   @Input()
+  hideCalendar: boolean;
+
+  @Input()
   selectDays:
     | 'today'
     | 'yesterday'
@@ -282,6 +285,10 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   findSelection(type) {
     const selectedType = this.selectionTypes.find((t) => t.type === type);
     this.selectedType = selectedType;
+
+    if (this.hideCalendar) {
+      this.dateSelected();
+    }
   }
 
   dateSelected() {

@@ -30,6 +30,14 @@
         >
           to ISO Date
         </button>
+
+        <button
+          mat-stroked-button
+          [color]="hideCalendar ? 'primary' : 'accent'"
+          (click)="changeCalendar()"
+        >
+          Hide/Show Calendar
+        </button>
       </h2>
       <br />
       <section class="example-section">
@@ -96,6 +104,7 @@
           [hideMonth]="hideMonth"
           [hideQuarter]="hideQuarter"
           [hideYear]="hideYear"
+          [hideCalendar]="hideCalendar"
         ></ngx-advanced-daterangepicker>
       </mat-card-content>
     </mat-card>

@@ -13,6 +13,7 @@ export class AppComponent {
   selectDays = 'today';
   dateRange;
   isoDateFormat;
+  hideCalendar;
 
   reloading;
   title = 'ngx-custom-daterangepicker';
@@ -26,6 +27,11 @@ export class AppComponent {
 
   changeToIso() {
     this.isoDateFormat = !this.isoDateFormat;
+    this.changeDefaultDate();
+  }
+
+  changeCalendar() {
+    this.hideCalendar = !this.hideCalendar;
     this.changeDefaultDate();
   }
 

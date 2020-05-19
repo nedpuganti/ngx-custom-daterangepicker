@@ -1,4 +1,3 @@
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
@@ -13,19 +12,10 @@ import {
   SatDatepickerModule,
 } from 'saturn-datepicker';
 import { NgxAdvancedDaterangepickerComponent } from './ngx-advanced-daterangepicker.component';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [NgxAdvancedDaterangepickerComponent],
-  imports: [
-    CommonModule,
-    SatDatepickerModule,
-    MatButtonModule,
-    FlexLayoutModule,
-    MatDividerModule,
-    MatDialogModule,
-  ],
+  imports: [CommonModule, SatDatepickerModule, MatButtonModule],
   exports: [NgxAdvancedDaterangepickerComponent],
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
@@ -36,4 +26,4 @@ import { MatDialogModule } from '@angular/material/dialog';
     },
   ],
 })
-export class NgxAdvancedDaterangepickerModule {}
+export class NgxAdvancedDaterangepickerModule2 {}

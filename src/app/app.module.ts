@@ -11,12 +11,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { NgxAdvancedDaterangepickerModule2 } from './ngxpo/ngx-advanced-daterangepicker.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxAdvancedDaterangepickerModule,
+    NgxAdvancedDaterangepickerModule2,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCardModule,

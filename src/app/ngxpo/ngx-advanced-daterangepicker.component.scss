@@ -1,0 +1,33 @@
+.advanced-daterangepicker {
+  button {
+    outline: none !important;
+  }
+
+  .text-align-left {
+    text-align: left !important;
+  }
+
+  .dropdown-toggle {
+    line-height: 25px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-toggle-menu {
+    width: 500px !important;
+
+    .date-button {
+      line-height: 36px !important;
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  .border-right {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .selected-date {
+    font: 500 1rem Roboto, "Helvetica Neue", sans-serif;
+  }
+}

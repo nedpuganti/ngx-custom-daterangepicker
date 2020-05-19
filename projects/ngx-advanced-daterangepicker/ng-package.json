@@ -5,8 +5,7 @@
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
       "saturn-datepicker": "saturn-datepicker",
-      "moment": "moment",
-      "ng-bootstrap": "ng-bootstrap"
+      "moment": "moment"
     }
   }
 }

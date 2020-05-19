@@ -13,7 +13,7 @@ const moment = moment_;
 
 @Component({
   // tslint:disable-next-line: component-selector
-  selector: 'ngx-advanced-daterangepicker',
+  selector: 'ngx2-advanced-daterangepicker',
   templateUrl: './ngx-advanced-daterangepicker.component.html',
   styleUrls: ['./ngx-advanced-daterangepicker.component.scss'],
 })
@@ -312,7 +312,13 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     // console.log('Sending data ' + JSON.stringify(data));
 
     this.dateRangeSelected.emit(dateObj);
-    this.dialog.closeAll();
+    this.close();
+  }
+
+  close() {
+    if (this.myDropMenu) {
+      this.myDropMenu.close();
+    }
   }
 
   reset() {
@@ -330,7 +336,6 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     this.reset();
     this.dialog.open(showDatePicker, {
       width: '500px',
-      height: '59%',
       hasBackdrop: true,
     });
   }

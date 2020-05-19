@@ -18,9 +18,6 @@ Import `NgxAdvancedDaterangepickerModule`
 
 Install Packages:
 ```
-npm install bootstrap
-npm install @ng-bootstrap/ng-bootstrap
-
 ng add @angular/material
 
 npm i saturn-datepicker

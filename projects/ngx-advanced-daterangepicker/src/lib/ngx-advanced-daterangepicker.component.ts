@@ -332,6 +332,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
       width: '500px',
       height: '59%',
       hasBackdrop: true,
+      autoFocus: false,
     });
   }
 }

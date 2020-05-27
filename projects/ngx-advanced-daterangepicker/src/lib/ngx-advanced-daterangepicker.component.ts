@@ -330,9 +330,11 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     this.reset();
     this.dialog.open(showDatePicker, {
       width: '500px',
-      height: '59%',
+      height: 'auto',
       hasBackdrop: true,
       autoFocus: false,
+      panelClass: 'daterangepicker-modal',
+      backdropClass: 'modal-background',
     });
   }
 }

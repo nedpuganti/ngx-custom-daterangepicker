@@ -11,98 +11,97 @@
 
 <ng-template #showDatePicker>
   <div class="advanced-daterangepicker">
-    <mat-dialog-content class="p-8">
-      <div fxLayout="row" fxLayoutAlign="start start">
-        <div fxFlex="40">
-          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('today') ? 'primary' : ''"
-            (click)="onDaySelect('today')">
-            Today
+    <!-- <mat-dialog-content class="p-8"> -->
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <div fxFlex="40">
+        <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('today') ? 'primary' : ''"
+          (click)="onDaySelect('today')">
+          Today
+        </button>
+        <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('yesterday') ? 'primary' : ''"
+          (click)="onDaySelect('yesterday')">
+          Yesterday
+        </button>
+        <ng-container *ngIf="!hideWeek">
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisWeek') ? 'primary' : ''"
+            (click)="onDaySelect('thisWeek')">
+            This Week (Sun-Today)
           </button>
-          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('yesterday') ? 'primary' : ''"
-            (click)="onDaySelect('yesterday')">
-            Yesterday
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('lastWeek') ? 'primary' : ''"
+            (click)="onDaySelect('lastWeek')">
+            Last Week (Sun-Sat)
           </button>
-          <ng-container *ngIf="!hideWeek">
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisWeek') ? 'primary' : ''"
-              (click)="onDaySelect('thisWeek')">
-              This Week (Sun-Today)
-            </button>
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('lastWeek') ? 'primary' : ''"
-              (click)="onDaySelect('lastWeek')">
-              Last Week (Sun-Sat)
-            </button>
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('last7Days') ? 'primary' : ''"
-              (click)="onDaySelect('last7Days')">
-              Last 7 Days
-            </button>
-          </ng-container>
-          <ng-container *ngIf="!hideMonth">
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisMonth') ? 'primary' : ''"
-              (click)="onDaySelect('thisMonth')">
-              This Month
-            </button>
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('lastMonth') ? 'primary' : ''"
-              (click)="onDaySelect('lastMonth')">
-              Last Month
-            </button>
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('last30Days') ? 'primary' : ''"
-              (click)="onDaySelect('last30Days')">
-              Last 30 Days
-            </button>
-          </ng-container>
-          <ng-container *ngIf="!hideQuarter">
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisQuarter') ? 'primary' : ''"
-              (click)="onDaySelect('thisQuarter')">
-              This Quarter
-            </button>
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('lastQuarter') ? 'primary' : ''"
-              (click)="onDaySelect('lastQuarter')">
-              Last Quarter
-            </button>
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('last90Days') ? 'primary' : ''"
-              (click)="onDaySelect('last90Days')">
-              Last 90 Days
-            </button>
-          </ng-container>
-          <ng-container *ngIf="!hideYear">
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('last12Months') ? 'primary' : ''"
-              (click)="onDaySelect('last12Months')">
-              Last 12 Months
-            </button>
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('lastYear') ? 'primary' : ''"
-              (click)="onDaySelect('lastYear')">
-              Last Calendar Year
-            </button>
-            <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisYear') ? 'primary' : ''"
-              (click)="onDaySelect('thisYear')">
-              This Year (Jan-Today)
-            </button>
-          </ng-container>
-          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('custom') ? 'primary' : ''"
-            *ngIf="!hideCalendar">
-            Custom
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('last7Days') ? 'primary' : ''"
+            (click)="onDaySelect('last7Days')">
+            Last 7 Days
           </button>
+        </ng-container>
+        <ng-container *ngIf="!hideMonth">
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisMonth') ? 'primary' : ''"
+            (click)="onDaySelect('thisMonth')">
+            This Month
+          </button>
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('lastMonth') ? 'primary' : ''"
+            (click)="onDaySelect('lastMonth')">
+            Last Month
+          </button>
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('last30Days') ? 'primary' : ''"
+            (click)="onDaySelect('last30Days')">
+            Last 30 Days
+          </button>
+        </ng-container>
+        <ng-container *ngIf="!hideQuarter">
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisQuarter') ? 'primary' : ''"
+            (click)="onDaySelect('thisQuarter')">
+            This Quarter
+          </button>
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('lastQuarter') ? 'primary' : ''"
+            (click)="onDaySelect('lastQuarter')">
+            Last Quarter
+          </button>
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('last90Days') ? 'primary' : ''"
+            (click)="onDaySelect('last90Days')">
+            Last 90 Days
+          </button>
+        </ng-container>
+        <ng-container *ngIf="!hideYear">
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('last12Months') ? 'primary' : ''"
+            (click)="onDaySelect('last12Months')">
+            Last 12 Months
+          </button>
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('lastYear') ? 'primary' : ''"
+            (click)="onDaySelect('lastYear')">
+            Last Calendar Year
+          </button>
+          <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisYear') ? 'primary' : ''"
+            (click)="onDaySelect('thisYear')">
+            This Year (Jan-Today)
+          </button>
+        </ng-container>
+        <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('custom') ? 'primary' : ''"
+          *ngIf="!hideCalendar">
+          Custom
+        </button>
+      </div>
+      <div fxFlex="1">
+        <mat-divider style="height:480px" [vertical]="true"></mat-divider>
+      </div>
+      <div fxFlex *ngIf="!hideCalendar">
+        <div class="p-16">
+          <span class="text-muted">{{ selectedType?.display }}</span>
+          <h3 class="f-w-500 m-b-0">
+            {{ selectedDate?.begin | date }} - {{ selectedDate?.end | date }}
+          </h3>
         </div>
-        <div fxFlex="1">
-          <mat-divider style="height:480px" [vertical]="true"></mat-divider>
-        </div>
-        <div fxFlex *ngIf="!hideCalendar">
-          <div class="p-16">
-            <span class="text-muted">{{ selectedType?.display }}</span>
-            <h3 class="f-w-500 m-b-0">
-              {{ selectedDate?.begin | date }} - {{ selectedDate?.end | date }}
-            </h3>
-          </div>
-          <mat-divider></mat-divider>
-          <div class="inlineCalendarContainer">
-            <sat-calendar [rangeMode]="true" [selected]="selectedDate" [maxDate]="today"
-              [beginDate]="selectedDate?.begin" [endDate]="selectedDate?.end"
-              (dateRangesChange)="inlineRangeChange($event)">
-            </sat-calendar>
-          </div>
+        <mat-divider></mat-divider>
+        <div class="inlineCalendarContainer">
+          <sat-calendar [rangeMode]="true" [selected]="selectedDate" [maxDate]="today" [beginDate]="selectedDate?.begin"
+            [endDate]="selectedDate?.end" (dateRangesChange)="inlineRangeChange($event)">
+          </sat-calendar>
         </div>
       </div>
-    </mat-dialog-content>
+    </div>
+    <!-- </mat-dialog-content> -->
     <ng-container *ngIf="!hideCalendar">
       <mat-divider></mat-divider>
       <mat-dialog-actions align="end">

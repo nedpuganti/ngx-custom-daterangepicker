@@ -7,6 +7,8 @@
         <mat-checkbox class="example-margin" [(ngModel)]="hideMonth">Hide Month</mat-checkbox>
         <mat-checkbox class="example-margin" [(ngModel)]="hideQuarter">Hide Quarter</mat-checkbox>
         <mat-checkbox class="example-margin" [(ngModel)]="hideYear">Hide Year</mat-checkbox>
+        <mat-checkbox class="example-margin" [(ngModel)]="hideLast">Hide Last</mat-checkbox>
+        <mat-checkbox class="example-margin" [(ngModel)]="showNext">Show Next</mat-checkbox>
       </section>
     </mat-card-content>
   </mat-card>
@@ -29,15 +31,24 @@
           <mat-radio-button class="example-margin" [value]="'today'">Today</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'yesterday'">Yesterday</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'thisWeek'">This Week</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'lastWeek'">Last Week</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'nextWeek'">Next Week</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'last7Days'">Last 7 Days</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'next7Days'">Next 7 Days</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'thisMonth'">This Month</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'lastMonth'">Last Month</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'nextMonth'">Next Month</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'last30Days'">Last 30 Days</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'next30Days'">Next 30 Days</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'thisQuarter'">This Quarter</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'lastQuarter'">Last Quarter</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'nextQuarter'">Next Quarter</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'last90Days'">Last 90 Days</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'next90Days'">Next 90 Days</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'last12Months'">Last 12 Months</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'next12Months'">Next 12 Months</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'lastYear'">Last Year</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'nextYear'">Next Year</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'thisYear'">This Year</mat-radio-button>
         </mat-radio-group>
       </section>
@@ -51,10 +62,11 @@
         <h2 class="example-h2">
           Selected Date : {{ dateRange?.startDate }} - {{ dateRange?.endDate }}
         </h2>
-        <ngx2-advanced-daterangepicker [selectDays]="selectDays" [isoDateFormat]="isoDateFormat"
+        <ngx-advanced-daterangepicker [selectDays]="selectDays" [isoDateFormat]="isoDateFormat"
           (on-change)="getDateSelection($event)" [hideWeek]="hideWeek" [hideMonth]="hideMonth"
-          [hideQuarter]="hideQuarter" [hideYear]="hideYear" [hideCalendar]="hideCalendar">
-        </ngx2-advanced-daterangepicker>
+          [hideQuarter]="hideQuarter" [hideYear]="hideYear" [hideCalendar]="hideCalendar" [showNext]="showNext"
+          [hideLast]="hideLast">
+        </ngx-advanced-daterangepicker>
       </mat-card-content>
     </mat-card>
   </ng-container>

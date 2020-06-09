@@ -14,6 +14,8 @@ export class AppComponent {
   dateRange;
   isoDateFormat;
   hideCalendar;
+  showNext;
+  hideLast;
 
   reloading;
   title = 'ngx-custom-daterangepicker';

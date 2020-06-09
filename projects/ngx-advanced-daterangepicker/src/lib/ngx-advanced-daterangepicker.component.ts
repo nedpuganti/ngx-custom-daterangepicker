@@ -194,11 +194,10 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   }
 
   onDaySelect(type) {
+    const startOfToday = moment().startOf('day').format();
     const endOfToday = moment().endOf('day').format();
 
     if (type === 'today') {
-      const startOfToday = moment().startOf('day').format();
-
       this.selectedDate.begin = startOfToday;
       this.selectedDate.end = endOfToday;
     }
@@ -248,10 +247,10 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     }
 
     if (type === 'next7Days') {
-      const next7Days = moment().add(6, 'd').startOf('day').format();
+      const next7Days = moment().add(6, 'd').endOf('day').format();
 
-      this.selectedDate.begin = next7Days;
-      this.selectedDate.end = endOfToday;
+      this.selectedDate.begin = startOfToday;
+      this.selectedDate.end = next7Days;
     }
 
     if (type === 'thisMonth') {
@@ -288,10 +287,10 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     }
 
     if (type === 'next30Days') {
-      const next30Days = moment().add(29, 'd').startOf('day').format();
+      const next30Days = moment().add(29, 'd').endOf('day').format();
 
-      this.selectedDate.begin = next30Days;
-      this.selectedDate.end = endOfToday;
+      this.selectedDate.begin = startOfToday;
+      this.selectedDate.end = next30Days;
     }
 
     if (type === 'thisQuarter') {
@@ -334,10 +333,10 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     }
 
     if (type === 'next90Days') {
-      const next90Days = moment().add(89, 'd').startOf('day').format();
+      const next90Days = moment().add(89, 'd').endOf('day').format();
 
-      this.selectedDate.begin = next90Days;
-      this.selectedDate.end = endOfToday;
+      this.selectedDate.begin = startOfToday;
+      this.selectedDate.end = next90Days;
     }
 
     if (type === 'last12Months') {
@@ -348,10 +347,10 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     }
 
     if (type === 'next12Months') {
-      const next12Months = moment().add(12, 'M').startOf('day').format();
+      const next12Months = moment().add(12, 'M').endOf('day').format();
 
-      this.selectedDate.begin = next12Months;
-      this.selectedDate.end = endOfToday;
+      this.selectedDate.begin = startOfToday;
+      this.selectedDate.end = next12Months;
     }
 
     if (type === 'lastYear') {

@@ -29,8 +29,6 @@ npm i @angular/material-moment-adapter
 
 Add styles:
 ```scss
-@import "~bootstrap/scss/bootstrap";
-
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 @import "~saturn-datepicker/theming";

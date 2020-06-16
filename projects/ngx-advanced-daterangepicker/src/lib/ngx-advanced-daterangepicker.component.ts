@@ -71,6 +71,9 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   @Input()
   showNext: boolean;
 
+  @Input()
+  showLastEndOf: boolean;
+
   // tslint:disable-next-line: no-output-rename
   @Output('on-change')
   dateRangeSelected: EventEmitter<any> = new EventEmitter<any>();
@@ -217,7 +220,12 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
       const startOfWeek = moment().startOf('week').format();
 
       this.selectedDate.begin = startOfWeek;
-      this.selectedDate.end = endOfToday;
+
+      if (this.showLastEndOf) {
+        this.selectedDate.end = moment().endOf('week').format();
+      } else {
+        this.selectedDate.end = endOfToday;
+      }
     }
 
     if (type === 'lastWeek') {
@@ -257,7 +265,12 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
       const startOfMonth = moment().startOf('month').format();
 
       this.selectedDate.begin = startOfMonth;
-      this.selectedDate.end = endOfToday;
+
+      if (this.showLastEndOf) {
+        this.selectedDate.end = moment().endOf('month').format();
+      } else {
+        this.selectedDate.end = endOfToday;
+      }
     }
 
     if (type === 'lastMonth') {
@@ -376,7 +389,12 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
       const startOfYear = moment().startOf('y').format();
 
       this.selectedDate.begin = startOfYear;
-      this.selectedDate.end = endOfToday;
+
+      if (this.showLastEndOf) {
+        this.selectedDate.end = moment().endOf('y').format();
+      } else {
+        this.selectedDate.end = endOfToday;
+      }
     }
 
     this.findSelection(type);

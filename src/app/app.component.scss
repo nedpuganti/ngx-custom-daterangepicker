@@ -12,3 +12,15 @@
 .example-margin {
   margin: 0 10px;
 }
+
+.mat-calendar-cell-semi-selected,
+.mat-calendar-body-end-range:not(.mat-calendar-body-begin-range),
+.mat-calendar-body-begin-range:not(.mat-calendar-body-end-range) {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.daterangepicker-modal {
+  .advanced-daterangepicker {
+    margin: -15px !important;
+  }
+}

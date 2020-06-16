@@ -9,6 +9,7 @@
         <mat-checkbox class="example-margin" [(ngModel)]="hideYear">Hide Year</mat-checkbox>
         <mat-checkbox class="example-margin" [(ngModel)]="hideLast">Hide Last</mat-checkbox>
         <mat-checkbox class="example-margin" [(ngModel)]="showNext">Show Next</mat-checkbox>
+        <mat-checkbox class="example-margin" [(ngModel)]="showLastEndOf">show Last EndOf</mat-checkbox>
       </section>
     </mat-card-content>
   </mat-card>
@@ -65,7 +66,7 @@
         <ngx-advanced-daterangepicker [selectDays]="selectDays" [isoDateFormat]="isoDateFormat"
           (on-change)="getDateSelection($event)" [hideWeek]="hideWeek" [hideMonth]="hideMonth"
           [hideQuarter]="hideQuarter" [hideYear]="hideYear" [hideCalendar]="hideCalendar" [showNext]="showNext"
-          [hideLast]="hideLast">
+          [hideLast]="hideLast" [showLastEndOf]="showLastEndOf">
         </ngx-advanced-daterangepicker>
       </mat-card-content>
     </mat-card>

@@ -127,7 +127,7 @@
         </div>
         <mat-divider></mat-divider>
         <div class="inlineCalendarContainer">
-          <sat-calendar [rangeMode]="true" [selected]="selectedDate" [maxDate]="!showNext ? today: ''"
+          <sat-calendar [rangeMode]="true" [selected]="selectedDate" [maxDate]="!showNext && !showLastEndOf ? today: ''"
             [beginDate]="selectedDate?.begin" [endDate]="selectedDate?.end"
             (dateRangesChange)="inlineRangeChange($event)">
           </sat-calendar>

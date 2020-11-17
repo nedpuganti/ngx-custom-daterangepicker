@@ -21,6 +21,8 @@ export class AppComponent {
   reloading;
   title = 'ngx-custom-daterangepicker';
 
+  customDate = { startDate: new Date(), endDate: new Date() };
+
   constructor(private cdr: ChangeDetectorRef) {}
 
   getDateSelection(ev) {

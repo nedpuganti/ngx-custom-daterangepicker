@@ -1,7 +1,7 @@
 <div class="advanced-daterangepicker">
   <button mat-stroked-button class="text-align-left dropdown-toggle" (click)="openDateSelectDialog(showDatePicker)">
     <span class="text-muted">{{ appliedType?.display }} </span><br />
-    {{ appliedDate?.begin | date }} -
+    {{ appliedDate?.start | date }} -
     {{ appliedDate?.end | date }}
     <span class="material-icons">
       keyboard_arrow_down
@@ -25,7 +25,8 @@
         <ng-container *ngIf="!hideWeek">
           <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisWeek') ? 'primary' : ''"
             (click)="onDaySelect('thisWeek')">
-            This Week (Sun-Today)
+            This Week (Sun-<ng-container *ngIf="!showLastEndOf">Today</ng-container>
+            <ng-container *ngIf="showLastEndOf">Sat</ng-container>)
           </button>
           <button *ngIf="!hideLast" mat-button class="w-full text-align-left m-b-4"
             [color]="isActive('lastWeek') ? 'primary' : ''" (click)="onDaySelect('lastWeek')">
@@ -107,7 +108,8 @@
           </button>
           <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('thisYear') ? 'primary' : ''"
             (click)="onDaySelect('thisYear')">
-            This Year (Jan-Today)
+            This Year (Jan-<ng-container *ngIf="!showLastEndOf">Today</ng-container>
+            <ng-container *ngIf="showLastEndOf">Dec</ng-container>)
           </button>
         </ng-container>
         <button mat-button class="w-full text-align-left m-b-4" [color]="isActive('custom') ? 'primary' : ''"
@@ -122,15 +124,14 @@
         <div class="p-16">
           <span class="text-muted">{{ selectedType?.display }}</span>
           <h3 class="f-w-500 m-b-0">
-            {{ selectedDate?.begin | date }} - {{ selectedDate?.end | date }}
+            {{ selectedDate?.start | date }} - {{ selectedDate?.end | date }}
           </h3>
         </div>
         <mat-divider></mat-divider>
         <div class="inlineCalendarContainer">
-          <sat-calendar [rangeMode]="true" [selected]="selectedDate" [maxDate]="!showNext && !showLastEndOf ? today: ''"
-            [beginDate]="selectedDate?.begin" [endDate]="selectedDate?.end"
-            (dateRangesChange)="inlineRangeChange($event)">
-          </sat-calendar>
+          <mat-calendar [selected]="selectedDateSelected" [maxDate]="!showNext && !showLastEndOf ? today : ''"
+            (selectedChange)="inlineRangeChange($event)">
+          </mat-calendar>
         </div>
       </div>
     </div>

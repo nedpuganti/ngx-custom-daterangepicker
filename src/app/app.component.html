@@ -1,4 +1,4 @@
-<section style="padding: 10px;">
+<section style="padding: 10px">
   <mat-card>
     <mat-card-content>
       <h2 class="example-h2">Hide Configuration</h2>
@@ -51,6 +51,7 @@
           <mat-radio-button class="example-margin" [value]="'lastYear'">Last Year</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'nextYear'">Next Year</mat-radio-button>
           <mat-radio-button class="example-margin" [value]="'thisYear'">This Year</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="'custom'">Custom</mat-radio-button>
         </mat-radio-group>
       </section>
     </mat-card-content>
@@ -66,7 +67,7 @@
         <ngx-advanced-daterangepicker [selectDays]="selectDays" [isoDateFormat]="isoDateFormat"
           (on-change)="getDateSelection($event)" [hideWeek]="hideWeek" [hideMonth]="hideMonth"
           [hideQuarter]="hideQuarter" [hideYear]="hideYear" [hideCalendar]="hideCalendar" [showNext]="showNext"
-          [hideLast]="hideLast" [showLastEndOf]="showLastEndOf">
+          [hideLast]="hideLast" [showLastEndOf]="showLastEndOf" [customDate]="customDate">
         </ngx-advanced-daterangepicker>
       </mat-card-content>
     </mat-card>

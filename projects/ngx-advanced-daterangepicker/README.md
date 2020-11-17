@@ -20,8 +20,6 @@ Install Packages:
 ```
 ng add @angular/material
 
-npm i saturn-datepicker
-
 npm i moment
 npm i @angular/material-moment-adapter
 ```
@@ -29,10 +27,5 @@ npm i @angular/material-moment-adapter
 
 Add styles:
 ```scss
-@import "~bootstrap/scss/bootstrap";
-
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-@import "~saturn-datepicker/theming";
-@import "~saturn-datepicker/bundle.css";
 ```

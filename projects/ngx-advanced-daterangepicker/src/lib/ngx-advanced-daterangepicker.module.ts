@@ -8,23 +8,28 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import {
   DateAdapter,
-  MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
-  SatDatepickerModule,
-} from 'saturn-datepicker';
+  MAT_DATE_FORMATS,
+  NativeDateAdapter,
+} from '@angular/material/core';
 import { NgxAdvancedDaterangepickerComponent } from './ngx-advanced-daterangepicker.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import {
+  DefaultMatCalendarRangeStrategy,
+  MatDatepickerModule,
+  MatRangeDateSelectionModel,
+  MAT_DATE_RANGE_SELECTION_STRATEGY,
+} from '@angular/material/datepicker';
 @NgModule({
   declarations: [NgxAdvancedDaterangepickerComponent],
   imports: [
     CommonModule,
-    SatDatepickerModule,
     MatButtonModule,
     FlexLayoutModule,
     MatDividerModule,
     MatDialogModule,
+    MatDatepickerModule,
   ],
   exports: [NgxAdvancedDaterangepickerComponent],
   providers: [
@@ -34,6 +39,12 @@ import { MatDialogModule } from '@angular/material/dialog';
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE],
     },
+    {
+      provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
+      useClass: DefaultMatCalendarRangeStrategy,
+    },
+    DefaultMatCalendarRangeStrategy,
+    MatRangeDateSelectionModel,
   ],
 })
 export class NgxAdvancedDaterangepickerModule {}

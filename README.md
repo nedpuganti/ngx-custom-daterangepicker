@@ -20,8 +20,6 @@ Install Packages:
 ```
 ng add @angular/material
 
-npm i saturn-datepicker
-
 npm i moment
 npm i @angular/material-moment-adapter
 ```
@@ -30,7 +28,12 @@ npm i @angular/material-moment-adapter
 Add styles:
 ```scss
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-@import "~saturn-datepicker/theming";
-@import "~saturn-datepicker/bundle.css";
 ```
+
+##
+https://indepth.dev/create-your-standalone-angular-library-in-10-minutes/
+
+ng build --watch ngx-advanced-daterangepicker
+
+$ ng serve
+$ firefox http://localhost:4200

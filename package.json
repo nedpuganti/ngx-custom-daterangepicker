@@ -11,7 +11,7 @@
     "postinstall": "ngcc",
     "build-github": "ng build --prod --base-href 'https://naren7229.github.io/ngx-custom-daterangepicker/'",
     "deploy-github": "angular-cli-ghpages  --no-silent --dir=dist/ngx-custom-daterangepicker --branch ngx-custom-daterangepicker",
-    "build-project": "ng build --prod ngx-advanced-daterangepicker"
+    "build-project": "ng build --configuration production ngx-advanced-daterangepicker"
   },
   "private": true,
   "dependencies": {

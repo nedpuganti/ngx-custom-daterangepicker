@@ -6,15 +6,13 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import * as moment_ from 'moment';
+import moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   DateRange,
   DefaultMatCalendarRangeStrategy,
   MatRangeDateSelectionModel,
 } from '@angular/material/datepicker';
-
-const moment = moment_;
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -23,7 +21,7 @@ const moment = moment_;
   styleUrls: ['./ngx-advanced-daterangepicker.component.scss'],
 })
 export class NgxAdvancedDaterangepickerComponent implements OnInit {
-  dRef: MatDialogRef<any>;
+  dRef: MatDialogRef<any> | undefined;
 
   constructor(
     public dialog: MatDialog,
@@ -32,7 +30,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   ) {}
 
   @Input()
-  hideCalendar: boolean;
+  hideCalendar: boolean | undefined;
 
   @Input()
   selectDays:
@@ -62,28 +60,28 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     | string = 'today';
 
   @Input()
-  isoDateFormat: boolean;
+  isoDateFormat: boolean | undefined;
 
   @Input()
-  hideWeek: boolean;
+  hideWeek: boolean | undefined;
 
   @Input()
-  hideMonth: boolean;
+  hideMonth: boolean | undefined;
 
   @Input()
-  hideQuarter: boolean;
+  hideQuarter: boolean | undefined;
 
   @Input()
-  hideYear: boolean;
+  hideYear: boolean | undefined;
 
   @Input()
-  hideLast: boolean;
+  hideLast: boolean | undefined;
 
   @Input()
-  showNext: boolean;
+  showNext: boolean | undefined;
 
   @Input()
-  showLastEndOf: boolean;
+  showLastEndOf: boolean | undefined;
 
   // tslint:disable-next-line: no-output-rename
   @Output('on-change')
@@ -94,7 +92,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
 
   selectedDateSelected: any = { start: '', end: '' };
   selectedDate: any = { start: '', end: '' };
-  selectedType = {
+  selectedType: any = {
     type: '',
     display: '',
   };
@@ -209,11 +207,11 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     this.dateSelected();
   }
 
-  isActive(type) {
+  isActive(type: any) {
     return this.selectedType?.type === type;
   }
 
-  onDaySelect(type) {
+  onDaySelect(type: any) {
     const startOfToday = moment().startOf('day').format();
     const endOfToday = moment().endOf('day').format();
 
@@ -440,7 +438,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     );
   }
 
-  inlineRangeChange(ev) {
+  inlineRangeChange(ev: any) {
     const selection = this.selectionModel.selection;
 
     const newSelection = this.selectionStrategy.selectionFinished(
@@ -463,7 +461,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     }
   }
 
-  findSelection(type) {
+  findSelection(type: any) {
     const selectedType = this.selectionTypes.find((t) => t.type === type);
     this.selectedType = selectedType;
 
@@ -494,7 +492,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     this.dateRangeSelected.emit(dateObj);
 
     if (this.initialized) {
-      this.dRef.close();
+      this.dRef?.close();
     } else {
       this.initialized = true;
     }
@@ -507,13 +505,13 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     this.loadDateRangeCalendar();
   }
 
-  openCheck(ev) {
+  openCheck(ev: any) {
     if (ev) {
       this.reset();
     }
   }
 
-  openDateSelectDialog(showDatePicker): void {
+  openDateSelectDialog(showDatePicker: any): void {
     this.reset();
     this.dRef = this.dialog.open(showDatePicker, {
       width: '500px',

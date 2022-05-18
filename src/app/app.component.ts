@@ -6,26 +6,26 @@ import { Component, ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hideMonth;
-  hideQuarter;
-  hideWeek;
-  hideYear;
+  hideMonth: any;
+  hideQuarter: any;
+  hideWeek: any;
+  hideYear: any;
   selectDays = 'today';
-  dateRange;
-  isoDateFormat;
-  hideCalendar;
-  showNext;
-  hideLast;
-  showLastEndOf;
+  dateRange: any;
+  isoDateFormat: any;
+  hideCalendar: any;
+  showNext: any;
+  hideLast: any;
+  showLastEndOf: any;
 
-  reloading;
+  reloading: any;
   title = 'ngx-custom-daterangepicker';
 
-  customDate = { startDate: new Date(), endDate: new Date() };
+  customDate: any = { startDate: new Date(), endDate: new Date() };
 
   constructor(private cdr: ChangeDetectorRef) {}
 
-  getDateSelection(ev) {
+  getDateSelection(ev: any) {
     console.log(ev);
     this.dateRange = ev;
   }

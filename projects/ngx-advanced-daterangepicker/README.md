@@ -1,31 +1,24 @@
 # NgxAdvancedDaterangepicker
 
-[![Material Advanced date range picker](screenshot.png)](https://stackblitz.com/github/naren7229/ngx-custom-daterangepicker)
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.0.
 
+## Code scaffolding
 
-## It's awesome, but how to use it?
+Run `ng generate component component-name --project ngx-advanced-daterangepicker` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-advanced-daterangepicker`.
+> Note: Don't forget to add `--project ngx-advanced-daterangepicker` or else it will be added to the default project in your `angular.json` file. 
 
-As easy as pie.
-Installation: `yarn add ngx-advanced-daterangepicker` or `npm install ngx-advanced-daterangepicker`
-Import `NgxAdvancedDaterangepickerModule`
-```
-<ngx-advanced-daterangepicker
-          [selectDays]="'today'"
-          [isoDateFormat]="true"
-          (on-change)="getDateSelection($event)"
-        ></ngx-advanced-daterangepicker>
-```
+## Build
 
-Install Packages:
-```
-ng add @angular/material
+Run `ng build ngx-advanced-daterangepicker` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-npm i moment
-npm i @angular/material-moment-adapter
-```
+## Publishing
 
+After building your library with `ng build ngx-advanced-daterangepicker`, go to the dist folder `cd dist/ngx-advanced-daterangepicker` and run `npm publish`.
 
-Add styles:
-```scss
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-```
+## Running unit tests
+
+Run `ng test ngx-advanced-daterangepicker` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

@@ -1,6 +1,6 @@
 {
   "name": "ngx-advanced-daterangepicker",
-  "version": "14.0.1",
+  "version": "15.2.2",
   "author": "Naren",
   "publishConfig": {
     "access": "public"
@@ -17,15 +17,14 @@
     "library"
   ],
   "peerDependencies": {
-    "@angular/common": "^14.0.4",
-    "@angular/core": "^14.0.4",
-    "@angular/flex-layout": "14.0.0-beta.40",
-    "@angular/localize": "^14.0.4",
-    "@angular/material": "^14.0.4",
-    "@angular/material-moment-adapter": "^14.0.4",
-    "moment": "^2.29.3"
+    "@angular/common": "^15.x",
+    "@angular/core": "^15.x",
+    "@angular/localize": "^15.x",
+    "@angular/material": "^15.x",
+    "@angular/material-moment-adapter": "^15.x",
+    "moment": "^2.x"
   },
   "dependencies": {
-    "tslib": "^2.4.0"
+    "tslib": "^2.5.0"
   }
 }

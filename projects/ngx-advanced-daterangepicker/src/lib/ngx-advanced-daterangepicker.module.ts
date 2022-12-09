@@ -1,4 +1,3 @@
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
@@ -21,12 +20,12 @@ import {
   MatRangeDateSelectionModel,
   MAT_DATE_RANGE_SELECTION_STRATEGY,
 } from '@angular/material/datepicker';
+import { NgxAdvancedDaterangepickerService } from './ngx-advanced-daterangepicker.service';
 @NgModule({
   declarations: [NgxAdvancedDaterangepickerComponent],
   imports: [
     CommonModule,
     MatButtonModule,
-    FlexLayoutModule,
     MatDividerModule,
     MatDialogModule,
     MatDatepickerModule,
@@ -45,6 +44,7 @@ import {
     },
     DefaultMatCalendarRangeStrategy,
     MatRangeDateSelectionModel,
+    NgxAdvancedDaterangepickerService,
   ],
 })
 export class NgxAdvancedDaterangepickerModule {}

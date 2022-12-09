@@ -21,7 +21,7 @@ import {
   styleUrls: ['./ngx-advanced-daterangepicker.component.scss'],
 })
 export class NgxAdvancedDaterangepickerComponent implements OnInit {
-  dRef: MatDialogRef<any> | undefined;
+  dRef!: MatDialogRef<any>;
 
   constructor(
     public dialog: MatDialog,
@@ -30,7 +30,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   ) {}
 
   @Input()
-  hideCalendar: boolean | undefined;
+  hideCalendar!: boolean;
 
   @Input()
   selectDays:
@@ -60,28 +60,28 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     | string = 'today';
 
   @Input()
-  isoDateFormat: boolean | undefined;
+  isoDateFormat!: boolean;
 
   @Input()
-  hideWeek: boolean | undefined;
+  hideWeek!: boolean;
 
   @Input()
-  hideMonth: boolean | undefined;
+  hideMonth!: boolean;
 
   @Input()
-  hideQuarter: boolean | undefined;
+  hideQuarter!: boolean;
 
   @Input()
-  hideYear: boolean | undefined;
+  hideYear!: boolean;
 
   @Input()
-  hideLast: boolean | undefined;
+  hideLast!: boolean;
 
   @Input()
-  showNext: boolean | undefined;
+  showNext!: boolean;
 
   @Input()
-  showLastEndOf: boolean | undefined;
+  showLastEndOf!: boolean;
 
   // tslint:disable-next-line: no-output-rename
   @Output('on-change')

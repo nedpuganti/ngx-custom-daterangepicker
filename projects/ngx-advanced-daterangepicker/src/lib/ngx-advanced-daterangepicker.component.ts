@@ -6,16 +6,15 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   DateRange,
   DefaultMatCalendarRangeStrategy,
   MatRangeDateSelectionModel,
 } from '@angular/material/datepicker';
+import moment from 'moment';
 
 @Component({
-  // tslint:disable-next-line: component-selector
   selector: 'ngx-advanced-daterangepicker',
   templateUrl: './ngx-advanced-daterangepicker.component.html',
   styleUrls: ['./ngx-advanced-daterangepicker.component.scss'],
@@ -98,7 +97,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   };
 
   appliedDate: any = { start: '', end: '' };
-  appliedType = {
+  appliedType: any = {
     type: '',
     display: '',
   };

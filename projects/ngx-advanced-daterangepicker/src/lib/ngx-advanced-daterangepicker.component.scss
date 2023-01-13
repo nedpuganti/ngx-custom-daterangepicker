@@ -1,10 +1,80 @@
-.advanced-daterangepicker {
+.advanced-daterangepicker-button {
   .text-align-left {
     text-align: left !important;
   }
 
-  .dropdown-toggle {
-    line-height: 24px !important;
-    margin-top: -2px;
+  .text-muted {
+    color: grey;
+  }
+
+  .mdc-button {
+    height: 60px;
+  }
+
+  .button-text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .flex-2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.advanced-daterangepicker {
+  .m-r-8 {
+    margin-right: 8px;
+  }
+
+  .daterangepicker-calendar-box {
+    flex-direction: row;
+    display: flex;
+    place-content: flex-start;
+    align-items: flex-start;
+    padding: 8px;
+
+    .calendar-buttons-list {
+      flex: 1 1 100%;
+      max-width: 40%;
+      display: flex;
+      gap: 4px;
+      flex-direction: column;
+
+      .mdc-button {
+        justify-content: flex-start;
+      }
+    }
+
+    .calendar-divider {
+      flex: 1 1 100%;
+      max-width: 1%;
+
+      .mat-divider {
+        height: 480px;
+      }
+    }
+
+    .calendar-selection {
+      flex: 1 1 0%;
+
+      .p-16 {
+        padding: 16px;
+      }
+
+      .f-w-500 {
+        font-weight: 500;
+      }
+
+      .m-b-0 {
+        margin-bottom: 0;
+      }
+
+      .text-muted {
+        color: grey;
+      }
+    }
   }
 }

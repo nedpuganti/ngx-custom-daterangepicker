@@ -1,4 +1,3 @@
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
@@ -26,7 +25,6 @@ import {
   imports: [
     CommonModule,
     MatButtonModule,
-    FlexLayoutModule,
     MatDividerModule,
     MatDialogModule,
     MatDatepickerModule,

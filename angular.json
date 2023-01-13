@@ -97,8 +97,8 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://naren7229.github.io/ngx-custom-daterangepicker/",
-            "name": "naren7229",
+            "baseHref": "https://nedpuganti.github.io/ngx-custom-daterangepicker/",
+            "name": "nedpuganti",
             "email": "narenedpuganti@gmail.com",
             "noSilent": true,
             "branch": "ngx-custom-daterangepicker"

@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "postinstall": "ngcc",
     "build-github": "ng build --configuration production --base-href 'https://nedpuganti.github.io/ngx-custom-daterangepicker/'",
-    "deploy-github": "angular-cli-ghpages  --no-silent --dir=dist/ngx-custom-daterangepicker --branch ngx-custom-daterangepicker",
+    "deploy-github": "ng deploy --base-href=https://nedpuganti.github.io/ngx-custom-daterangepicker/",
     "build-project": "ng build --configuration production ngx-advanced-daterangepicker"
   },
   "private": true,

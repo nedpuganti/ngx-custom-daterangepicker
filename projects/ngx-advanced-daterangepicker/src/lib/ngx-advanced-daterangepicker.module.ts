@@ -20,6 +20,7 @@ import {
   MatRangeDateSelectionModel,
   MAT_DATE_RANGE_SELECTION_STRATEGY,
 } from '@angular/material/datepicker';
+import { NgxAdvancedDaterangepickerService } from './ngx-advanced-daterangepicker.service';
 @NgModule({
   declarations: [NgxAdvancedDaterangepickerComponent],
   imports: [
@@ -43,6 +44,7 @@ import {
     },
     DefaultMatCalendarRangeStrategy,
     MatRangeDateSelectionModel,
+    NgxAdvancedDaterangepickerService,
   ],
 })
 export class NgxAdvancedDaterangepickerModule {}

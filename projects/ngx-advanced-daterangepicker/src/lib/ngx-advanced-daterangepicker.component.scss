@@ -17,8 +17,9 @@
     align-items: flex-start;
   }
 
-  .flex-2 {
+  .daterangepicker-flex {
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
   }
@@ -45,6 +46,16 @@
 
       .mdc-button {
         justify-content: flex-start;
+      }
+    }
+
+    .calendar-buttons-list-only {
+      max-width: 100%;
+      align-items: center;
+
+      .mdc-button {
+        width: 100%;
+        justify-content: center;
       }
     }
 

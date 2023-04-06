@@ -67,7 +67,8 @@
         <ngx-advanced-daterangepicker [selectDays]="selectDays" [isoDateFormat]="isoDateFormat"
           (on-change)="getDateSelection($event)" [hideWeek]="hideWeek" [hideMonth]="hideMonth"
           [hideQuarter]="hideQuarter" [hideYear]="hideYear" [hideCalendar]="hideCalendar" [showNext]="showNext"
-          [hideLast]="hideLast" [showLastEndOf]="showLastEndOf" [customDate]="customDate">
+          [hideLast]="hideLast" [showLastEndOf]="showLastEndOf" [customDate]="customDate"
+          [width]="hideCalendar?'200px':'550px'">
         </ngx-advanced-daterangepicker>
       </mat-card-content>
     </mat-card>

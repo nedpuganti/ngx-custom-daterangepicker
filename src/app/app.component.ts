@@ -1,4 +1,5 @@
 import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { DateSelectionTypes } from 'ngx-advanced-daterangepicker';
 
 @Component({
   selector: 'ncd-root',
@@ -10,7 +11,7 @@ export class AppComponent implements AfterViewInit {
   hideQuarter: any;
   hideWeek: any;
   hideYear: any;
-  selectDays = 'today';
+  selectDays: DateSelectionTypes = DateSelectionTypes.TODAY;
   dateRange: any;
   isoDateFormat: any;
   hideCalendar: any;

@@ -24,6 +24,7 @@ import { NgxAdvancedDaterangepickerService } from './ngx-advanced-daterangepicke
   styleUrls: ['./ngx-advanced-daterangepicker.component.scss'],
 })
 export class NgxAdvancedDaterangepickerComponent implements OnInit {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dRef!: MatDialogRef<any>;
 
   constructor(
@@ -34,7 +35,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   ) {}
 
   @Input()
-  width: string = '500px';
+  width = '500px';
 
   @Input()
   hideCalendar!: boolean;
@@ -67,7 +68,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   @Input()
   showLastEndOf!: boolean;
 
-  // tslint:disable-next-line: no-output-rename
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix, @angular-eslint/no-output-rename
   @Output('on-change')
   dateRangeSelected: EventEmitter<CustomDateSelection> =
     new EventEmitter<CustomDateSelection>();

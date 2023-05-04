@@ -15,8 +15,9 @@
       "prefix": "ncd",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
+            "allowedCommonJsDependencies": ["moment"],
             "outputPath": "dist/ngx-custom-daterangepicker",
             "index": "src/index.html",
             "main": "src/main.ts",

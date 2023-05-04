@@ -21,7 +21,7 @@ export enum DateSelectionTypes {
   LAST_YEAR = 'lastYear',
   NEXT_YEAR = 'nextYear',
   THIS_YEAR = 'thisYear',
-  CUSTOM = 'custom',
+  CUSTOM = 'custom'
 }
 
 export enum DateSelectionDisplayTypes {
@@ -47,7 +47,7 @@ export enum DateSelectionDisplayTypes {
   NEXT_12_MONTHS = 'Next 12 Months',
   NEXT_YEAR = 'Next Calendar Year',
   THIS_YEAR = 'This Year',
-  CUSTOM = 'Custom',
+  CUSTOM = 'Custom'
 }
 
 export enum SelectionModeTypes {
@@ -56,13 +56,13 @@ export enum SelectionModeTypes {
   'MONTH' = 'MONTH',
   'QUARTER' = 'QUARTER',
   'YEAR' = 'YEAR',
-  'CUSTOM' = 'CUSTOM',
+  'CUSTOM' = 'CUSTOM'
 }
 
 export enum SelectionDisplayTypes {
   'NEXT' = 'next',
   'LAST' = 'last',
-  'THIS' = 'this',
+  'THIS' = 'this'
 }
 
 export type DateTypes = 'startDate' | 'endDate';
@@ -77,4 +77,5 @@ export type SelectionTypes = {
   displayText?: string | null;
   mode: SelectionModeTypes | null;
   displayType: SelectionDisplayTypes | null;
+  isActive?: boolean;
 };

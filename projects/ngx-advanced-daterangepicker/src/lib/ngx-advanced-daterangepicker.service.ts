@@ -6,22 +6,17 @@ import {
   DateSelectionTypes,
   SelectionDisplayTypes,
   SelectionModeTypes,
-  SelectionTypes,
+  SelectionTypes
 } from './ngx-advanced-daterangepicker.interface';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class NgxAdvancedDaterangepickerService {
-  constructor() {}
-
-  public getSelectedDate(
-    type: DateSelectionTypes | null,
-    showLastEndOf: boolean,
-  ): DateSelection {
-    let selectedDate: DateSelection = {
+  public getSelectedDate(type: DateSelectionTypes | null, showLastEndOf: boolean): DateSelection {
+    const selectedDate: DateSelection = {
       startDate: '',
-      endDate: '',
+      endDate: ''
     };
 
     const startOfToday = moment().startOf('day').format();
@@ -33,10 +28,7 @@ export class NgxAdvancedDaterangepickerService {
     }
 
     if (type === DateSelectionTypes.YESTERDAY) {
-      const startOfYesterday = moment()
-        .subtract(1, 'd')
-        .startOf('day')
-        .format();
+      const startOfYesterday = moment().subtract(1, 'd').startOf('day').format();
       const endOfYesterday = moment().subtract(1, 'd').endOf('day').format();
 
       selectedDate.startDate = startOfYesterday;
@@ -56,10 +48,7 @@ export class NgxAdvancedDaterangepickerService {
     }
 
     if (type === DateSelectionTypes.LAST_WEEK) {
-      const startOfLastWeek = moment()
-        .subtract(1, 'w')
-        .startOf('week')
-        .format();
+      const startOfLastWeek = moment().subtract(1, 'w').startOf('week').format();
       const endOfLastWeek = moment().subtract(1, 'w').endOf('week').format();
 
       selectedDate.startDate = startOfLastWeek;
@@ -101,10 +90,7 @@ export class NgxAdvancedDaterangepickerService {
     }
 
     if (type === DateSelectionTypes.LAST_MONTH) {
-      const startOfLastMonth = moment()
-        .subtract(1, 'M')
-        .startOf('month')
-        .format();
+      const startOfLastMonth = moment().subtract(1, 'M').startOf('month').format();
       const endOfLastMonth = moment().subtract(1, 'M').endOf('month').format();
 
       selectedDate.startDate = startOfLastMonth;
@@ -146,24 +132,15 @@ export class NgxAdvancedDaterangepickerService {
     }
 
     if (type === DateSelectionTypes.LAST_QUARTER) {
-      const startOfLastQuarter = moment()
-        .subtract(1, 'Q')
-        .startOf('quarter')
-        .format();
-      const endOfLastQuarter = moment()
-        .subtract(1, 'Q')
-        .endOf('quarter')
-        .format();
+      const startOfLastQuarter = moment().subtract(1, 'Q').startOf('quarter').format();
+      const endOfLastQuarter = moment().subtract(1, 'Q').endOf('quarter').format();
 
       selectedDate.startDate = startOfLastQuarter;
       selectedDate.endDate = endOfLastQuarter;
     }
 
     if (type === DateSelectionTypes.NEXT_QUARTER) {
-      const startOfNextQuarter = moment()
-        .add(1, 'Q')
-        .startOf('quarter')
-        .format();
+      const startOfNextQuarter = moment().add(1, 'Q').startOf('quarter').format();
       const endOfNextQuarter = moment().add(1, 'Q').endOf('quarter').format();
 
       selectedDate.startDate = startOfNextQuarter;
@@ -199,10 +176,7 @@ export class NgxAdvancedDaterangepickerService {
     }
 
     if (type === DateSelectionTypes.LAST_YEAR) {
-      const startOfLastYear = moment()
-        .subtract(1, 'y')
-        .startOf('year')
-        .format();
+      const startOfLastYear = moment().subtract(1, 'y').startOf('year').format();
       const endOfLastYear = moment().subtract(1, 'y').endOf('year').format();
 
       selectedDate.startDate = startOfLastYear;
@@ -238,144 +212,144 @@ export class NgxAdvancedDaterangepickerService {
         type: DateSelectionTypes.TODAY,
         displayName: DateSelectionDisplayTypes.TODAY,
         mode: SelectionModeTypes.DAY,
-        displayType: SelectionDisplayTypes.THIS,
+        displayType: SelectionDisplayTypes.THIS
       },
       {
         type: DateSelectionTypes.YESTERDAY,
         displayName: DateSelectionDisplayTypes.YESTERDAY,
         mode: SelectionModeTypes.DAY,
-        displayType: SelectionDisplayTypes.THIS,
+        displayType: SelectionDisplayTypes.THIS
       },
       {
         type: DateSelectionTypes.THIS_WEEK,
         displayName: DateSelectionDisplayTypes.THIS_WEEK,
         mode: SelectionModeTypes.WEEK,
         displayType: SelectionDisplayTypes.THIS,
-        displayText: '(Sun-Today)',
+        displayText: '(Sun-Today)'
       },
       {
         type: DateSelectionTypes.LAST_WEEK,
         displayName: DateSelectionDisplayTypes.LAST_WEEK,
         mode: SelectionModeTypes.WEEK,
         displayType: SelectionDisplayTypes.LAST,
-        displayText: '(Sun-Sat)',
+        displayText: '(Sun-Sat)'
       },
       {
         type: DateSelectionTypes.NEXT_WEEK,
         displayName: DateSelectionDisplayTypes.NEXT_WEEK,
         mode: SelectionModeTypes.WEEK,
         displayType: SelectionDisplayTypes.NEXT,
-        displayText: '(Sun-Sat)',
+        displayText: '(Sun-Sat)'
       },
       {
         type: DateSelectionTypes.LAST_7_DAYS,
         displayName: DateSelectionDisplayTypes.LAST_7_DAYS,
         mode: SelectionModeTypes.WEEK,
-        displayType: SelectionDisplayTypes.LAST,
+        displayType: SelectionDisplayTypes.LAST
       },
       {
         type: DateSelectionTypes.NEXT_7_DAYS,
         displayName: DateSelectionDisplayTypes.NEXT_7_DAYS,
         mode: SelectionModeTypes.WEEK,
-        displayType: SelectionDisplayTypes.NEXT,
+        displayType: SelectionDisplayTypes.NEXT
       },
       {
         type: DateSelectionTypes.THIS_MONTH,
         displayName: DateSelectionDisplayTypes.THIS_MONTH,
         mode: SelectionModeTypes.MONTH,
-        displayType: SelectionDisplayTypes.THIS,
+        displayType: SelectionDisplayTypes.THIS
       },
       {
         type: DateSelectionTypes.LAST_MONTH,
         displayName: DateSelectionDisplayTypes.LAST_MONTH,
         mode: SelectionModeTypes.MONTH,
-        displayType: SelectionDisplayTypes.LAST,
+        displayType: SelectionDisplayTypes.LAST
       },
       {
         type: DateSelectionTypes.NEXT_MONTH,
         displayName: DateSelectionDisplayTypes.NEXT_MONTH,
         mode: SelectionModeTypes.MONTH,
-        displayType: SelectionDisplayTypes.NEXT,
+        displayType: SelectionDisplayTypes.NEXT
       },
       {
         type: DateSelectionTypes.LAST_30_DAYS,
         displayName: DateSelectionDisplayTypes.LAST_30_DAYS,
         mode: SelectionModeTypes.MONTH,
-        displayType: SelectionDisplayTypes.LAST,
+        displayType: SelectionDisplayTypes.LAST
       },
       {
         type: DateSelectionTypes.NEXT_30_DAYS,
         displayName: DateSelectionDisplayTypes.NEXT_30_DAYS,
         mode: SelectionModeTypes.MONTH,
-        displayType: SelectionDisplayTypes.NEXT,
+        displayType: SelectionDisplayTypes.NEXT
       },
       {
         type: DateSelectionTypes.THIS_QUARTER,
         displayName: DateSelectionDisplayTypes.THIS_QUARTER,
         mode: SelectionModeTypes.QUARTER,
-        displayType: SelectionDisplayTypes.THIS,
+        displayType: SelectionDisplayTypes.THIS
       },
       {
         type: DateSelectionTypes.LAST_QUARTER,
         displayName: DateSelectionDisplayTypes.LAST_QUARTER,
         mode: SelectionModeTypes.QUARTER,
-        displayType: SelectionDisplayTypes.LAST,
+        displayType: SelectionDisplayTypes.LAST
       },
       {
         type: DateSelectionTypes.NEXT_QUARTER,
         displayName: DateSelectionDisplayTypes.NEXT_QUARTER,
         mode: SelectionModeTypes.QUARTER,
-        displayType: SelectionDisplayTypes.NEXT,
+        displayType: SelectionDisplayTypes.NEXT
       },
       {
         type: DateSelectionTypes.LAST_90_DAYS,
         displayName: DateSelectionDisplayTypes.LAST_90_DAYS,
         mode: SelectionModeTypes.QUARTER,
-        displayType: SelectionDisplayTypes.LAST,
+        displayType: SelectionDisplayTypes.LAST
       },
       {
         type: DateSelectionTypes.NEXT_90_DAYS,
         displayName: DateSelectionDisplayTypes.NEXT_90_DAYS,
         mode: SelectionModeTypes.QUARTER,
-        displayType: SelectionDisplayTypes.NEXT,
+        displayType: SelectionDisplayTypes.NEXT
       },
       {
         type: DateSelectionTypes.LAST_12_MONTHS,
         displayName: DateSelectionDisplayTypes.LAST_12_MONTHS,
         mode: SelectionModeTypes.YEAR,
-        displayType: SelectionDisplayTypes.LAST,
+        displayType: SelectionDisplayTypes.LAST
       },
       {
         type: DateSelectionTypes.NEXT_12_MONTHS,
         displayName: DateSelectionDisplayTypes.NEXT_12_MONTHS,
         mode: SelectionModeTypes.YEAR,
-        displayType: SelectionDisplayTypes.NEXT,
+        displayType: SelectionDisplayTypes.NEXT
       },
       {
         type: DateSelectionTypes.LAST_YEAR,
         displayName: DateSelectionDisplayTypes.LAST_YEAR,
         mode: SelectionModeTypes.YEAR,
-        displayType: SelectionDisplayTypes.LAST,
+        displayType: SelectionDisplayTypes.LAST
       },
       {
         type: DateSelectionTypes.NEXT_YEAR,
         displayName: DateSelectionDisplayTypes.NEXT_YEAR,
         mode: SelectionModeTypes.YEAR,
-        displayType: SelectionDisplayTypes.NEXT,
+        displayType: SelectionDisplayTypes.NEXT
       },
       {
         type: DateSelectionTypes.THIS_YEAR,
         displayName: DateSelectionDisplayTypes.THIS_YEAR,
         mode: SelectionModeTypes.YEAR,
         displayType: SelectionDisplayTypes.THIS,
-        displayText: '(Jan-Today)',
+        displayText: '(Jan-Today)'
       },
       {
         type: DateSelectionTypes.CUSTOM,
         displayName: DateSelectionDisplayTypes.CUSTOM,
         mode: SelectionModeTypes.CUSTOM,
-        displayType: null,
-      },
+        displayType: null
+      }
     ];
   }
 }

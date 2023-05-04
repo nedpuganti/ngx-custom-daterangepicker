@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import {
   DateRange,
   DefaultMatCalendarRangeStrategy,
   MatRangeDateSelectionModel,
+  MatDatepickerModule,
+  MAT_DATE_RANGE_SELECTION_STRATEGY
 } from '@angular/material/datepicker';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import moment from 'moment';
 import {
   CustomDateSelection,
@@ -13,28 +15,48 @@ import {
   SelectionModeTypes,
   DateSelectionTypes,
   SelectionDisplayTypes,
-  SelectionTypes,
+  SelectionTypes
 } from './ngx-advanced-daterangepicker.interface';
-import { ThemePalette } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, ThemePalette } from '@angular/material/core';
 import { NgxAdvancedDaterangepickerService } from './ngx-advanced-daterangepicker.service';
+import { MatDividerModule } from '@angular/material/divider';
+import { NgClass, NgFor, NgIf, DatePipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 
 @Component({
   selector: 'ngx-advanced-daterangepicker',
   templateUrl: './ngx-advanced-daterangepicker.component.html',
   styleUrls: ['./ngx-advanced-daterangepicker.component.scss'],
+  standalone: true,
+  imports: [MatButtonModule, NgClass, NgFor, NgIf, MatDividerModule, MatDatepickerModule, MatDialogModule, DatePipe],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
+    {
+      provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
+      useClass: DefaultMatCalendarRangeStrategy
+    },
+    DefaultMatCalendarRangeStrategy,
+    MatRangeDateSelectionModel,
+    NgxAdvancedDaterangepickerService
+  ]
 })
 export class NgxAdvancedDaterangepickerComponent implements OnInit {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dRef!: MatDialogRef<any>;
 
-  constructor(
-    private dialog: MatDialog,
-    private readonly selectionModel: MatRangeDateSelectionModel<Date>,
-    private readonly selectionStrategy: DefaultMatCalendarRangeStrategy<Date>,
-    private ngxAdvancedDaterangepickerService: NgxAdvancedDaterangepickerService,
-  ) {}
+  private dialog = inject(MatDialog);
+  private readonly selectionModel = inject(MatRangeDateSelectionModel<Date>);
+  private readonly selectionStrategy = inject(DefaultMatCalendarRangeStrategy<Date>);
+  private ngxAdvancedDaterangepickerService = inject(NgxAdvancedDaterangepickerService);
 
   @Input()
-  width: string = '500px';
+  width = '500px';
 
   @Input()
   hideCalendar!: boolean;
@@ -67,40 +89,37 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   @Input()
   showLastEndOf!: boolean;
 
-  // tslint:disable-next-line: no-output-rename
-  @Output('on-change')
-  dateRangeSelected: EventEmitter<CustomDateSelection> =
-    new EventEmitter<CustomDateSelection>();
+  @Output()
+  dateRangeSelected: EventEmitter<CustomDateSelection> = new EventEmitter<CustomDateSelection>();
 
   @Input()
   customDate: CustomDateSelection = {
     startDate: '',
-    endDate: '',
+    endDate: ''
   };
 
-  public selectedDateSelected: DateRange<Date | moment.Moment | null> =
-    new DateRange<Date>(null, null);
+  public selectedDateSelected: DateRange<Date | moment.Moment | null> = new DateRange<Date>(null, null);
 
   public selectedDate: DateSelection = {
     startDate: '',
-    endDate: '',
+    endDate: ''
   };
   public selectedType: SelectionTypes = {
     type: null,
     displayName: null,
     mode: null,
-    displayType: null,
+    displayType: null
   };
 
   public appliedDate: DateSelection = {
     startDate: '',
-    endDate: '',
+    endDate: ''
   };
   public appliedType: SelectionTypes = {
     type: null,
     displayName: null,
     mode: null,
-    displayType: null,
+    displayType: null
   };
 
   public selectionTypes: Array<SelectionTypes> = [];
@@ -120,10 +139,9 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   }
 
   loadDateSelections(): void {
-    const selection =
-      this.ngxAdvancedDaterangepickerService.getSelectionTypes();
+    const selection: SelectionTypes[] = this.ngxAdvancedDaterangepickerService.getSelectionTypes();
 
-    this.selectionTypes = selection.filter((type) => {
+    this.selectionTypes = selection.filter((type: SelectionTypes) => {
       if (this.showLastEndOf) {
         if (type.type === DateSelectionTypes.THIS_WEEK) {
           type.displayText = '(Sun-Sat)';
@@ -165,25 +183,25 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     });
   }
 
-  isActive(type: DateSelectionTypes | null): boolean {
-    return this.selectedType?.type === type;
-  }
+  trackByIdentity = (index: number, type: SelectionTypes) => type.type;
 
   onDaySelect(type: DateSelectionTypes | null): void {
     if (type === DateSelectionTypes.CUSTOM) {
-      const startOfDay = moment(this.customDate.startDate)
-        .startOf('day')
-        .format();
-      const endOfDay = moment(this.customDate.endDate).endOf('day').format();
+      if (this.customDate.startDate && this.customDate.endDate) {
+        const startOfDay = moment(this.customDate.startDate).startOf('day').format();
+        const endOfDay = moment(this.customDate.endDate).endOf('day').format();
 
-      this.selectedDate.startDate = startOfDay;
-      this.selectedDate.endDate = endOfDay;
+        this.selectedDate = { startDate: startOfDay, endDate: endOfDay };
+      } else {
+        this.customDate = JSON.parse(JSON.stringify(this.selectedDate));
+      }
     } else {
-      this.selectedDate =
-        this.ngxAdvancedDaterangepickerService.getSelectedDate(
-          type,
-          this.showLastEndOf,
-        );
+      this.customDate = {
+        startDate: '',
+        endDate: ''
+      };
+
+      this.selectedDate = this.ngxAdvancedDaterangepickerService.getSelectedDate(type, this.showLastEndOf);
     }
 
     this.loadDateRangeCalendar();
@@ -193,39 +211,34 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   loadDateRangeCalendar(): void {
     this.selectedDateSelected = new DateRange(
       moment(this.selectedDate.startDate).startOf('day'),
-      moment(this.selectedDate.endDate).endOf('day'),
+      moment(this.selectedDate.endDate).endOf('day')
     );
   }
 
   inlineRangeChange(date: Date): void {
     const selection = this.selectionModel.selection;
 
-    const newSelection = this.selectionStrategy.selectionFinished(
-      date,
-      selection,
-    );
+    const newSelection = this.selectionStrategy.selectionFinished(date, selection);
 
     this.selectionModel.updateSelection(newSelection, this);
-    this.selectedDateSelected = new DateRange<Date>(
-      newSelection.start,
-      newSelection.end,
-    );
+    this.selectedDateSelected = new DateRange<Date>(newSelection.start, newSelection.end);
 
     if (this.selectionModel.isComplete()) {
-      this.selectedDate.startDate = moment(newSelection.start)
-        .startOf('day')
-        .format();
-      this.selectedDate.endDate = moment(newSelection.end)
-        .endOf('day')
-        .format();
+      this.selectedDate.startDate = moment(newSelection.start).startOf('day').format();
+      this.selectedDate.endDate = moment(newSelection.end).endOf('day').format();
       this.findSelection(DateSelectionTypes.CUSTOM);
     }
   }
 
   findSelection(type: DateSelectionTypes | null) {
-    const selectedType = this.selectionTypes.find((t) => t.type === type);
-
-    if (selectedType) this.selectedType = selectedType;
+    this.selectionTypes.forEach((types) => {
+      if (types.type === type) {
+        types.isActive = true;
+        this.selectedType = types;
+      } else {
+        types.isActive = false;
+      }
+    });
 
     if (this.hideCalendar) {
       this.dateSelected();
@@ -238,7 +251,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
 
     const dateObj: CustomDateSelection = {
       startDate: '',
-      endDate: '',
+      endDate: ''
     };
 
     if (this.isoDateFormat) {
@@ -273,7 +286,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
       hasBackdrop: true,
       autoFocus: false,
       panelClass: 'daterangepicker-modal',
-      backdropClass: 'modal-background',
+      backdropClass: 'modal-background'
     });
   }
 }

@@ -2,7 +2,7 @@
   <button mat-stroked-button (click)="openDateSelectDialog(showDatePicker)">
     <div class="button-text-block">
       <div>
-        <span class="text-muted">{{ appliedType.display }} </span>
+        <span class="text-muted">{{ appliedType.displayName }} </span>
       </div>
       <div class="daterangepicker-flex">
         {{ appliedDate.startDate | date }} -
@@ -22,7 +22,7 @@
       <div class="calendar-buttons-list" [ngClass]="hideCalendar ? 'calendar-buttons-list-only': ''">
         <ng-container *ngFor="let type of selectionTypes">
           <button mat-button [color]="isActive(type.type) ? primaryColor : ''" (click)="onDaySelect(type.type)">
-            {{type.display}}
+            {{type.displayName}} {{type?.displayText}}
           </button>
         </ng-container>
       </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="calendar-selection">
           <div class="p-16">
-            <span class="text-muted">{{ selectedType.display }}</span>
+            <span class="text-muted">{{ selectedType.displayName }}</span>
             <h3 class="f-w-500 m-b-0">
               {{ selectedDate.startDate | date }} - {{ selectedDate.endDate | date }}
             </h3>

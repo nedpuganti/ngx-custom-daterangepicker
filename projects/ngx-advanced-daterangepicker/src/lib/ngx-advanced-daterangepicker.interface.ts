@@ -29,23 +29,23 @@ export enum DateSelectionDisplayTypes {
   YESTERDAY = 'Yesterday',
   THIS_WEEK = 'This Week',
   LAST_WEEK = 'Last Week',
-  NEXT_WEEK = 'Next Week',
   LAST_7_DAYS = 'Last 7 Days',
+  NEXT_WEEK = 'Next Week',
   NEXT_7_DAYS = 'Next 7 Days',
   THIS_MONTH = 'This Month',
   LAST_MONTH = 'Last Month',
-  NEXT_MONTH = 'Next Month',
   LAST_30_DAYS = 'Last 30 Days',
+  NEXT_MONTH = 'Next Month',
   NEXT_30_DAYS = 'Next 30 Days',
   THIS_QUARTER = 'This Quarter',
   LAST_QUARTER = 'Last Quarter',
-  NEXT_QUARTER = 'Next Quarter',
   LAST_90_DAYS = 'Last 90 Days',
+  NEXT_QUARTER = 'Next Quarter',
   NEXT_90_DAYS = 'Next 90 Days',
   LAST_12_MONTHS = 'Last 12 Months',
-  NEXT_12_MONTHS = 'Next 12 Months',
   LAST_YEAR = 'Last Year',
-  NEXT_YEAR = 'Next Year',
+  NEXT_12_MONTHS = 'Next 12 Months',
+  NEXT_YEAR = 'Next Calendar Year',
   THIS_YEAR = 'This Year',
   CUSTOM = 'Custom',
 }
@@ -73,7 +73,8 @@ export type CustomDateSelection = DateSelection;
 
 export type SelectionTypes = {
   type: DateSelectionTypes | null;
-  display: DateSelectionDisplayTypes | null;
+  displayName: DateSelectionDisplayTypes | null;
+  displayText?: string | null;
   mode: SelectionModeTypes | null;
   displayType: SelectionDisplayTypes | null;
 };

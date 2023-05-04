@@ -87,7 +87,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   };
   public selectedType: SelectionTypes = {
     type: null,
-    display: null,
+    displayName: null,
     mode: null,
     displayType: null,
   };
@@ -98,7 +98,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
   };
   public appliedType: SelectionTypes = {
     type: null,
-    display: null,
+    displayName: null,
     mode: null,
     displayType: null,
   };
@@ -124,6 +124,16 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
       this.ngxAdvancedDaterangepickerService.getSelectionTypes();
 
     this.selectionTypes = selection.filter((type) => {
+      if (this.showLastEndOf) {
+        if (type.type === DateSelectionTypes.THIS_WEEK) {
+          type.displayText = '(Sun-Sat)';
+        }
+
+        if (type.type === DateSelectionTypes.THIS_YEAR) {
+          type.displayText = '(Jan-Dec)';
+        }
+      }
+
       if (
         (type.displayType === SelectionDisplayTypes.NEXT && !this.showNext) ||
         (type.displayType === SelectionDisplayTypes.LAST && this.hideLast)

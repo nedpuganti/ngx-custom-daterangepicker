@@ -1,6 +1,6 @@
 {
   "name": "ngx-advanced-daterangepicker",
-  "version": "15.2.0",
+  "version": "15.2.2",
   "author": "Naren",
   "publishConfig": {
     "access": "public"

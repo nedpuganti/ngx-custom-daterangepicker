@@ -190,13 +190,27 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
 
   onDaySelect(type: DateSelectionTypes | null): void {
     if (type === DateSelectionTypes.CUSTOM) {
-      const startOfDay = moment(this.customDate.startDate).startOf('day').format();
-      const endOfDay = moment(this.customDate.endDate).endOf('day').format();
+      if (this.customDate.startDate && this.customDate.endDate) {
+        const startOfDay = moment(this.customDate.startDate)
+          .startOf('day')
+          .format();
+        const endOfDay = moment(this.customDate.endDate).endOf('day').format();
 
-      this.selectedDate.startDate = startOfDay;
-      this.selectedDate.endDate = endOfDay;
+        this.selectedDate = { startDate: startOfDay, endDate: endOfDay };
+      } else {
+        this.customDate = JSON.parse(JSON.stringify(this.selectedDate));
+      }
     } else {
-      this.selectedDate = this.ngxAdvancedDaterangepickerService.getSelectedDate(type, this.showLastEndOf);
+      this.customDate = {
+        startDate: '',
+        endDate: '',
+      };
+
+      this.selectedDate =
+        this.ngxAdvancedDaterangepickerService.getSelectedDate(
+          type,
+          this.showLastEndOf,
+        );
     }
 
     this.loadDateRangeCalendar();

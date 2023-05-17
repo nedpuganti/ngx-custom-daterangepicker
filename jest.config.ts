@@ -8,10 +8,10 @@ export default {
       'jest-preset-angular',
       {
         tsconfig: '<rootDir>/tsconfig.spec.json',
-        stringifyContentPathRegex: '\\.(html|svg)$',
-      },
-    ],
+        stringifyContentPathRegex: '\\.(html|svg)$'
+      }
+    ]
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/apps/ngx-custom-daterangepicker',
+  coverageDirectory: '../../coverage/apps/ngx-custom-daterangepicker'
 };

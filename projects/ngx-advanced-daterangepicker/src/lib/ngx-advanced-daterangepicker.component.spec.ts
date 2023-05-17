@@ -8,9 +8,8 @@ describe('NgxAdvancedDaterangepickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NgxAdvancedDaterangepickerComponent ]
-    })
-    .compileComponents();
+      declarations: [NgxAdvancedDaterangepickerComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

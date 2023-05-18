@@ -77,4 +77,5 @@ export type SelectionTypes = {
   displayText?: string | null;
   mode: SelectionModeTypes | null;
   displayType: SelectionDisplayTypes | null;
+  isActive?: boolean;
 };

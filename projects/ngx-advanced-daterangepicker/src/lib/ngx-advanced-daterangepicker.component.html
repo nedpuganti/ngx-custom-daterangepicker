@@ -19,8 +19,8 @@
   <div class="advanced-daterangepicker">
     <div class="daterangepicker-calendar-box">
       <div class="calendar-buttons-list" [ngClass]="hideCalendar ? 'calendar-buttons-list-only': ''">
-        <ng-container *ngFor="let type of selectionTypes">
-          <button mat-button [color]="isActive(type.type) ? primaryColor : ''" (click)="onDaySelect(type.type)">
+        <ng-container *ngFor="let type of selectionTypes; trackBy: trackByIdentity">
+          <button mat-button [color]="type?.isActive ? primaryColor : ''" (click)="onDaySelect(type.type)">
             {{type.displayName}} {{type?.displayText}}
           </button>
         </ng-container>

@@ -79,7 +79,6 @@ import { MatCardModule } from '@angular/material/card';
             <ngx-advanced-daterangepicker
               [selectDays]="selectDays"
               [isoDateFormat]="isoDateFormat"
-              (on-change)="getDateSelection($event)"
               [hideWeek]="hideWeek"
               [hideMonth]="hideMonth"
               [hideQuarter]="hideQuarter"
@@ -90,6 +89,7 @@ import { MatCardModule } from '@angular/material/card';
               [showLastEndOf]="showLastEndOf"
               [customDate]="customDate"
               [width]="hideCalendar ? '200px' : '550px'"
+              (dateRangeSelected)="getDateSelection($event)"
             >
             </ngx-advanced-daterangepicker>
           </mat-card-content>

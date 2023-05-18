@@ -19,15 +19,15 @@
   <div class="advanced-daterangepicker">
     <div class="daterangepicker-calendar-box">
       <div class="calendar-buttons-list" [ngClass]="hideCalendar ? 'calendar-buttons-list-only': ''">
-        <ng-container *ngFor="let type of selectionTypes; trackBy: trackByIdentity">
+        @for (type of selectionTypes; track trackByIdentity($index, type)) {
           <button mat-button [color]="type?.isActive ? primaryColor : ''" (click)="onDaySelect(type.type)">
             {{type.displayName}} {{type?.displayText}}
           </button>
-        </ng-container>
+        }
       </div>
-      <ng-container *ngIf="!hideCalendar">
+      @if (!hideCalendar) {
         <div class="calendar-divider">
-          <mat-divider [vertical]="true"></mat-divider>
+          <mat-divider [vertical]="true" />
         </div>
         <div class="calendar-selection">
           <div class="p-16">
@@ -36,23 +36,22 @@
               {{ selectedDate.startDate | date }} - {{ selectedDate.endDate | date }}
             </h3>
           </div>
-          <mat-divider></mat-divider>
+          <mat-divider />
           <div class="inlineCalendarContainer">
             <mat-calendar [selected]="selectedDateSelected" [maxDate]="!showNext && !showLastEndOf ? today : ''"
-              (selectedChange)="inlineRangeChange($event)">
-            </mat-calendar>
+              (selectedChange)="inlineRangeChange($event)" />
           </div>
         </div>
-      </ng-container>
+      }
     </div>
-    <ng-container *ngIf="!hideCalendar">
-      <mat-divider></mat-divider>
+    @if (!hideCalendar) {
+      <mat-divider />
       <mat-dialog-actions align="end">
         <button mat-button mat-dialog-close>Cancel</button>
         <button mat-button [color]="primaryColor" (click)="dateSelected()" class="m-r-8">
           Apply
         </button>
       </mat-dialog-actions>
-    </ng-container>
+    }
   </div>
 </ng-template>

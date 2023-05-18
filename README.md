@@ -1,6 +1,7 @@
 # NgxAdvancedDaterangepicker
 
-[![Material Advanced date range picker](screenshot.png)](https://stackblitz.com/github/naren7229/ngx-custom-daterangepicker)
+[![Material Advanced date range picker](screen-1.png)](https://stackblitz.com/github/nedpuganti/ngx-custom-daterangepicker)
+[![Material Advanced date range picker](screen-2.png)](https://stackblitz.com/github/nedpuganti/ngx-custom-daterangepicker)
 
 
 ## It's awesome, but how to use it?

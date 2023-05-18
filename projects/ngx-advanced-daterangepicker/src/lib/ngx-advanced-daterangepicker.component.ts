@@ -1,35 +1,36 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { DatePipe, NgClass } from '@angular/common';
+import { Component, EventEmitter, inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, ThemePalette } from '@angular/material/core';
 import {
   DateRange,
   DefaultMatCalendarRangeStrategy,
-  MatRangeDateSelectionModel,
+  MAT_DATE_RANGE_SELECTION_STRATEGY,
   MatDatepickerModule,
-  MAT_DATE_RANGE_SELECTION_STRATEGY
+  MatRangeDateSelectionModel
 } from '@angular/material/datepicker';
-import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import moment from 'moment';
+
 import {
   CustomDateSelection,
   DateSelection,
   DateSelectionDisplayTypes,
-  SelectionModeTypes,
   DateSelectionTypes,
   SelectionDisplayTypes,
+  SelectionModeTypes,
   SelectionTypes
 } from './ngx-advanced-daterangepicker.interface';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, ThemePalette } from '@angular/material/core';
 import { NgxAdvancedDaterangepickerService } from './ngx-advanced-daterangepicker.service';
-import { MatDividerModule } from '@angular/material/divider';
-import { NgClass, NgFor, NgIf, DatePipe } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 
 @Component({
   selector: 'ngx-advanced-daterangepicker',
   templateUrl: './ngx-advanced-daterangepicker.component.html',
   styleUrls: ['./ngx-advanced-daterangepicker.component.scss'],
   standalone: true,
-  imports: [MatButtonModule, NgClass, NgFor, NgIf, MatDividerModule, MatDatepickerModule, MatDialogModule, DatePipe],
+  imports: [MatButtonModule, NgClass, MatDividerModule, MatDatepickerModule, MatDialogModule, DatePipe],
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     {
@@ -278,7 +279,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit {
     this.loadDateRangeCalendar();
   }
 
-  openDateSelectDialog(showDatePicker: any): void {
+  openDateSelectDialog(showDatePicker: TemplateRef<unknown>): void {
     this.reset();
     this.dRef = this.dialog.open(showDatePicker, {
       width: this.width,

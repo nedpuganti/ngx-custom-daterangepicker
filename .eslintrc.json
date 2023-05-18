@@ -1,6 +1,7 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  // "ignorePatterns": ["projects/**/*"],
+  "plugins": ["@angular-eslint/eslint-plugin", "@angular-eslint/template", "simple-import-sort", "import"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -26,7 +27,21 @@
             "prefix": "ncd",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "varsIgnorePattern": "^_",
+            "argsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+          }
+        ],
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
+        "import/first": "error",
+        "import/newline-after-import": "error",
+        "import/no-duplicates": "error"
       }
     },
     {
@@ -35,7 +50,11 @@
         "plugin:@angular-eslint/template/recommended",
         "plugin:@angular-eslint/template/accessibility"
       ],
-      "rules": {}
+      "rules": {
+        "@angular-eslint/template/prefer-self-closing-tags": [
+          "error"
+        ]
+      }
     }
   ]
 }

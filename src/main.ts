@@ -1,14 +1,12 @@
+import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-
-import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { DateSelectionTypes, NgxAdvancedDaterangepickerComponent } from 'ngx-advanced-daterangepicker';
-import { NgIf } from '@angular/common';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'ncd-root',
@@ -68,7 +66,7 @@ import { MatCardModule } from '@angular/material/card';
         </mat-card-content>
       </mat-card>
 
-      <ng-container *ngIf="!reloading">
+      @if (!reloading) {
         <br />
         <mat-card>
           <mat-card-content>
@@ -90,11 +88,10 @@ import { MatCardModule } from '@angular/material/card';
               [customDate]="customDate"
               [width]="hideCalendar ? '200px' : '550px'"
               (dateRangeSelected)="getDateSelection($event)"
-            >
-            </ngx-advanced-daterangepicker>
+            />
           </mat-card-content>
         </mat-card>
-      </ng-container>
+      }
     </section>
   `,
   styles: [
@@ -111,7 +108,7 @@ import { MatCardModule } from '@angular/material/card';
     `
   ],
   standalone: true,
-  imports: [MatCardModule, MatCheckboxModule, FormsModule, MatButtonModule, MatRadioModule, NgIf, NgxAdvancedDaterangepickerComponent]
+  imports: [MatCardModule, MatCheckboxModule, FormsModule, MatButtonModule, MatRadioModule, NgxAdvancedDaterangepickerComponent]
 })
 export class AppComponent implements AfterViewInit {
   hideMonth: any;

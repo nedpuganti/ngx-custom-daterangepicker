@@ -1,15 +1,13 @@
-/* eslint-disable */
+// This file is required by the IDE plugin. If you only need `ng test` to work, you can delete it.
+// The JustJeb plugin only needs the configuration in angular.json.
+
+globalThis.ngJest = {
+  skipNgcc: true,
+  tsconfig: 'tsconfig.spec.json' // this is the project root tsconfig
+};
+
+/** @type {import('@jest/types').Config.InitialOptions} */
 module.exports = {
-  displayName: 'ngx-advanced-daterangepicker',
-  preset: '../../jest.preset.js',
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json'
-    }
-  },
-  transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest'
-  },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/projects/ngx-advanced-daterangepicker'
+  preset: '<rootDir>',
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts']
 };

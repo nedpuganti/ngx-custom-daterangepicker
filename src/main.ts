@@ -1,97 +1,195 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  provideExperimentalZonelessChangeDetection,
+  signal,
+  ViewEncapsulation,
+  WritableSignal
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatRadioModule } from '@angular/material/radio';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDivider } from '@angular/material/divider';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatToolbar } from '@angular/material/toolbar';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { DateSelectionTypes, NgxAdvancedDaterangepickerComponent } from 'ngx-advanced-daterangepicker';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {
+  DateFormatTypes,
+  DateSelection,
+  DateSelectionDisplayTypes,
+  DateSelectionTypes,
+  NgxAdvancedDaterangepickerComponent,
+  SelectionTypes
+} from 'ngx-advanced-daterangepicker';
 
 @Component({
   selector: 'ncd-root',
   template: `
-    <section style="padding: 10px">
-      <mat-card>
-        <mat-card-content>
-          <h2>Hide Configuration</h2>
-          <section>
-            <mat-checkbox [(ngModel)]="hideWeek" (change)="changeDefaultDate()">Hide Week</mat-checkbox>
-            <mat-checkbox [(ngModel)]="hideMonth" (change)="changeDefaultDate()">Hide Month</mat-checkbox>
-            <mat-checkbox [(ngModel)]="hideQuarter" (change)="changeDefaultDate()">Hide Quarter</mat-checkbox>
-            <mat-checkbox [(ngModel)]="hideYear" (change)="changeDefaultDate()">Hide Year</mat-checkbox>
-            <mat-checkbox [(ngModel)]="hideLast" (change)="changeDefaultDate()">Hide Last</mat-checkbox>
-            <mat-checkbox [(ngModel)]="showNext" (change)="changeDefaultDate()">Show Next</mat-checkbox>
-            <mat-checkbox [(ngModel)]="showLastEndOf" (change)="changeDefaultDate()">show Last EndOf</mat-checkbox>
-          </section>
-        </mat-card-content>
-      </mat-card>
-      <br />
-      <mat-card>
-        <mat-card-content>
-          <h2>
-            Change Default Date
-            <button mat-stroked-button [color]="isoDateFormat ? 'primary' : 'accent'" (click)="changeToIso()">to ISO Date</button>
-
-            <button mat-stroked-button [color]="hideCalendar ? 'primary' : 'accent'" (click)="changeCalendar()">Hide/Show Calendar</button>
-          </h2>
+    <mat-toolbar style="background: #d7e3ff;color:#005cbb">
+      <span>Advanced DateRange Picker</span>
+    </mat-toolbar>
+    <section style="padding: 20px">
+      <div style="display: grid;grid-template-columns: 1fr 1fr;gap: 20px;">
+        <div>
+          <mat-card appearance="outlined">
+            <mat-card-header>
+              <mat-card-title>Configuration</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <section style="display: flex; flex-direction: column;">
+                <mat-checkbox (change)="configurationChange()" [(ngModel)]="inlineDatePicker">Inline Range</mat-checkbox>
+                @if (!showNext()) {
+                  <mat-checkbox (change)="configurationChange()" [(ngModel)]="disableMaxDate">Disable Max Date</mat-checkbox>
+                }
+                <mat-checkbox (change)="configurationChange()" [(ngModel)]="hideWeek">Hide Week</mat-checkbox>
+                <mat-checkbox (change)="configurationChange()" [(ngModel)]="hideMonth">Hide Month</mat-checkbox>
+                <mat-checkbox (change)="configurationChange()" [(ngModel)]="hideQuarter">Hide Quarter</mat-checkbox>
+                <mat-checkbox (change)="configurationChange()" [(ngModel)]="hideYear">Hide Year</mat-checkbox>
+                <mat-checkbox (change)="configurationChange()" [(ngModel)]="hideLast">Hide Last</mat-checkbox>
+                <mat-checkbox (change)="configurationChange()" [(ngModel)]="showNext">Show Next</mat-checkbox>
+                <mat-checkbox (change)="configurationChange()" [(ngModel)]="showLastEndOfThisPeriod">
+                  Show Last EndOf This Period
+                </mat-checkbox>
+              </section>
+            </mat-card-content>
+          </mat-card>
           <br />
-          <section>
-            <mat-radio-group [(ngModel)]="selectDays" (change)="changeDefaultDate()">
-              <mat-radio-button [value]="'today'">Today</mat-radio-button>
-              <mat-radio-button [value]="'yesterday'">Yesterday</mat-radio-button>
-              <mat-radio-button [value]="'thisWeek'">This Week</mat-radio-button>
-              <mat-radio-button [value]="'lastWeek'">Last Week</mat-radio-button>
-              <mat-radio-button [value]="'nextWeek'">Next Week</mat-radio-button>
-              <mat-radio-button [value]="'last7Days'">Last 7 Days</mat-radio-button>
-              <mat-radio-button [value]="'next7Days'">Next 7 Days</mat-radio-button>
-              <mat-radio-button [value]="'thisMonth'">This Month</mat-radio-button>
-              <mat-radio-button [value]="'lastMonth'">Last Month</mat-radio-button>
-              <mat-radio-button [value]="'nextMonth'">Next Month</mat-radio-button>
-              <mat-radio-button [value]="'last30Days'">Last 30 Days</mat-radio-button>
-              <mat-radio-button [value]="'next30Days'">Next 30 Days</mat-radio-button>
-              <mat-radio-button [value]="'thisQuarter'">This Quarter</mat-radio-button>
-              <mat-radio-button [value]="'lastQuarter'">Last Quarter</mat-radio-button>
-              <mat-radio-button [value]="'nextQuarter'">Next Quarter</mat-radio-button>
-              <mat-radio-button [value]="'last90Days'">Last 90 Days</mat-radio-button>
-              <mat-radio-button [value]="'next90Days'">Next 90 Days</mat-radio-button>
-              <mat-radio-button [value]="'last12Months'">Last 12 Months</mat-radio-button>
-              <mat-radio-button [value]="'next12Months'">Next 12 Months</mat-radio-button>
-              <mat-radio-button [value]="'lastYear'">Last Year</mat-radio-button>
-              <mat-radio-button [value]="'nextYear'">Next Year</mat-radio-button>
-              <mat-radio-button [value]="'thisYear'">This Year</mat-radio-button>
-              <mat-radio-button [value]="'custom'">Custom</mat-radio-button>
-            </mat-radio-group>
-          </section>
-        </mat-card-content>
-      </mat-card>
+          <mat-card appearance="outlined">
+            <mat-card-header>
+              <mat-card-title>Date Selection</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <section>
+                <mat-radio-group [(ngModel)]="dateFormatType">
+                  <mat-radio-button [value]="'JS'">JS Date</mat-radio-button>
+                  <mat-radio-button [value]="'ISO'">ISO Date</mat-radio-button>
+                  <mat-radio-button [value]="">Default</mat-radio-button>
+                </mat-radio-group>
+              </section>
+              <br />
+              <section>
+                <mat-radio-group [(ngModel)]="selectDays">
+                  <mat-radio-button [value]="'custom'">Custom</mat-radio-button>
+                  <mat-radio-button [value]="'today'">Today</mat-radio-button>
+                  <mat-radio-button [value]="'yesterday'">Yesterday</mat-radio-button>
 
-      @if (!reloading) {
-        <br />
-        <mat-card>
-          <mat-card-content>
-            <h2>
-              Selected Date : {{ dateRange?.startDate }} -
-              {{ dateRange?.endDate }}
-            </h2>
-            <ngx-advanced-daterangepicker
-              [selectDays]="selectDays"
-              [isoDateFormat]="isoDateFormat"
-              [hideWeek]="hideWeek"
-              [hideMonth]="hideMonth"
-              [hideQuarter]="hideQuarter"
-              [hideYear]="hideYear"
-              [hideCalendar]="hideCalendar"
-              [showNext]="showNext"
-              [hideLast]="hideLast"
-              [showLastEndOf]="showLastEndOf"
-              [customDate]="customDate"
-              [width]="hideCalendar ? '200px' : '550px'"
-              (dateRangeSelected)="getDateSelection($event)"
-            />
-          </mat-card-content>
-        </mat-card>
-      }
+                  @if (!hideWeek()) {
+                    <div>
+                      <mat-radio-button [value]="'thisWeek'">This Week</mat-radio-button>
+                      @if (!hideLast()) {
+                        <mat-radio-button [value]="'lastWeek'">Last Week</mat-radio-button>
+                        <mat-radio-button [value]="'last7Days'">Last 7 Days</mat-radio-button>
+                      }
+                      @if (showNext()) {
+                        <mat-radio-button [value]="'nextWeek'">Next Week</mat-radio-button>
+                        <mat-radio-button [value]="'next7Days'">Next 7 Days</mat-radio-button>
+                      }
+                    </div>
+                  }
+                  @if (!hideMonth()) {
+                    <div>
+                      <mat-radio-button [value]="'thisMonth'">This Month</mat-radio-button>
+                      @if (!hideLast()) {
+                        <mat-radio-button [value]="'lastMonth'">Last Month</mat-radio-button>
+                        <mat-radio-button [value]="'last30Days'">Last 30 Days</mat-radio-button>
+                      }
+                      @if (showNext()) {
+                        <mat-radio-button [value]="'nextMonth'">Next Month</mat-radio-button>
+                        <mat-radio-button [value]="'next30Days'">Next 30 Days</mat-radio-button>
+                      }
+                    </div>
+                  }
+                  @if (!hideQuarter()) {
+                    <div>
+                      <mat-radio-button [value]="'thisQuarter'">This Quarter</mat-radio-button>
+                      @if (!hideLast()) {
+                        <mat-radio-button [value]="'lastQuarter'">Last Quarter</mat-radio-button>
+                        <mat-radio-button [value]="'last90Days'">Last 90 Days</mat-radio-button>
+                      }
+                      @if (showNext()) {
+                        <mat-radio-button [value]="'nextQuarter'">Next Quarter</mat-radio-button>
+                        <mat-radio-button [value]="'next90Days'">Next 90 Days</mat-radio-button>
+                      }
+                    </div>
+                  }
+                  @if (!hideYear()) {
+                    <div>
+                      <mat-radio-button [value]="'thisYear'">This Year</mat-radio-button>
+                      @if (!hideLast()) {
+                        <mat-radio-button [value]="'last12Months'">Last 12 Months</mat-radio-button>
+                        <mat-radio-button [value]="'lastYear'">Last Year</mat-radio-button>
+                      }
+                      @if (showNext()) {
+                        <mat-radio-button [value]="'next12Months'">Next 12 Months</mat-radio-button>
+                        <mat-radio-button [value]="'nextYear'">Next Year</mat-radio-button>
+                      }
+                    </div>
+                  }
+                </mat-radio-group>
+              </section>
+              <br />
+              <section style="display: flex; flex-direction: row; gap:20px">
+                <div>
+                  @if (hideCalendar()) {
+                    <button mat-flat-button (click)="changeCalendar()">Show Calendar</button>
+                  } @else {
+                    <button mat-stroked-button (click)="changeCalendar()">Hide Calendar</button>
+                  }
+                </div>
+
+                @if (!inlineDatePicker() && !hideCalendar()) {
+                  <div>
+                    @if (autoApply()) {
+                      <button mat-flat-button (click)="changeAutoApply()">Apply Manually</button>
+                    } @else {
+                      <button mat-stroked-button (click)="changeAutoApply()">Apply Automatically</button>
+                    }
+                  </div>
+                }
+              </section>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div>
+          <mat-card appearance="outlined">
+            <mat-card-content>
+              <mat-card appearance="outlined">
+                <mat-card-content>
+                  @let dateRanges = dateRange();
+                  <h3>Selected : {{ selectedType() }}</h3>
+                  <h3>Date Range : {{ dateRanges.startDate | date: 'medium' }} - {{ dateRanges.endDate | date: 'medium' }}</h3>
+                  <h3>Selected Date: {{ dateRanges.startDate }} - {{ dateRanges.endDate }}</h3>
+                </mat-card-content>
+              </mat-card>
+              <br />
+              <ngx-advanced-daterangepicker
+                [inlineDatePicker]="inlineDatePicker()"
+                [disableMaxDate]="disableMaxDate()"
+                [selectDays]="selectDays"
+                [dateFormatType]="dateFormatType()"
+                [hideWeek]="hideWeek()"
+                [hideMonth]="hideMonth()"
+                [hideQuarter]="hideQuarter()"
+                [hideYear]="hideYear()"
+                [hideCalendar]="hideCalendar()"
+                [showNext]="showNext()"
+                [hideLast]="hideLast()"
+                [showLastEndOfThisPeriod]="showLastEndOfThisPeriod()"
+                [customDate]="customDate()"
+                [autoApply]="autoApply()"
+                [width]="hideCalendar() ? '200px' : '550px'"
+                (dateRangeSelected)="getDateSelection($event)"
+                (appliedTypeSelected)="getAppliedTypeSelected($event)"
+              />
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
     </section>
   `,
   styles: [
@@ -108,55 +206,67 @@ import { DateSelectionTypes, NgxAdvancedDaterangepickerComponent } from 'ngx-adv
     `
   ],
   standalone: true,
-  imports: [MatCardModule, MatCheckboxModule, FormsModule, MatButtonModule, MatRadioModule, NgxAdvancedDaterangepickerComponent]
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+    MatCheckbox,
+    FormsModule,
+    MatButton,
+    MatRadioGroup,
+    MatRadioButton,
+    MatToolbar,
+    MatDivider,
+    DatePipe,
+    NgxAdvancedDaterangepickerComponent
+  ]
 })
-export class AppComponent implements AfterViewInit {
-  hideMonth: any;
-  hideQuarter: any;
-  hideWeek: any;
-  hideYear: any;
-  selectDays: DateSelectionTypes = DateSelectionTypes.TODAY;
-  dateRange: any;
-  isoDateFormat: any;
-  hideCalendar: any;
-  showNext: any;
-  hideLast: any;
-  showLastEndOf: any;
-
-  reloading: any;
+export class AppComponent {
   title = 'ngx-custom-daterangepicker';
 
-  customDate: any = { startDate: new Date(), endDate: new Date() };
+  inlineDatePicker: WritableSignal<boolean> = signal(false);
+  disableMaxDate: WritableSignal<boolean> = signal(false);
+  hideMonth: WritableSignal<boolean> = signal(false);
+  hideQuarter: WritableSignal<boolean> = signal(true);
+  hideWeek: WritableSignal<boolean> = signal(false);
+  hideYear: WritableSignal<boolean> = signal(false);
+  dateFormatType: WritableSignal<DateFormatTypes | null> = signal(null);
+  hideCalendar: WritableSignal<boolean> = signal(false);
+  showNext: WritableSignal<boolean> = signal(false);
+  hideLast: WritableSignal<boolean> = signal(false);
+  showLastEndOfThisPeriod: WritableSignal<boolean> = signal(false);
+  autoApply: WritableSignal<boolean> = signal(false);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  selectDays: DateSelectionTypes = DateSelectionTypes.TODAY;
+  selectedType: WritableSignal<DateSelectionDisplayTypes | null> = signal(null);
+  dateRange: WritableSignal<DateSelection<Date | string | null>> = signal({ startDate: null, endDate: null });
+  customDate: WritableSignal<DateSelection> = signal({ startDate: new Date(), endDate: new Date() });
 
-  ngAfterViewInit() {
-    this.cdr.detectChanges();
+  configurationChange(): void {
+    this.selectDays = DateSelectionTypes.TODAY;
   }
 
-  getDateSelection(ev: any) {
-    console.log(ev);
-    this.dateRange = ev;
+  getDateSelection(ev: DateSelection<Date | string | null>): void {
+    this.dateRange.set(ev);
   }
 
-  changeToIso() {
-    this.isoDateFormat = !this.isoDateFormat;
-    this.changeDefaultDate();
+  getAppliedTypeSelected(ev: SelectionTypes): void {
+    this.selectDays = ev.type as DateSelectionTypes;
+    this.selectedType.set(ev.displayName);
   }
 
-  changeCalendar() {
-    this.hideCalendar = !this.hideCalendar;
-    this.changeDefaultDate();
+  changeCalendar(): void {
+    this.hideCalendar.update((val: boolean): boolean => !val);
   }
 
-  changeDefaultDate() {
-    this.reloading = true;
-    this.cdr.detectChanges();
-    this.reloading = false;
-    this.cdr.detectChanges();
+  changeAutoApply(): void {
+    this.autoApply.update((val: boolean): boolean => !val);
   }
 }
 
 bootstrapApplication(AppComponent, {
-  providers: [provideAnimations()]
+  providers: [provideAnimations(), provideExperimentalZonelessChangeDetection(), provideAnimationsAsync(), provideAnimationsAsync()]
 }).catch((err) => console.error(err));

@@ -1,5 +1,6 @@
 module.exports = {
   globals: {},
+  preset: 'jest-preset-angular',
   collectCoverage: true,
   coverageThreshold: {
     global: {

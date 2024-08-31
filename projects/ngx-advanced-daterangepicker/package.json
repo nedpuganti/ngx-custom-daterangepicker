@@ -1,30 +1,56 @@
 {
   "name": "ngx-advanced-daterangepicker",
-  "version": "17.1.1",
+  "description": "Custom date range picker for Angular",
+  "license": "MIT",
+  "version": "18.2.6",
   "author": "Naren",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nedpuganti/ngx-advanced-daterangepicker.git"
+    "url": "https://github.com/nedpuganti/ngx-custom-daterangepicker.git"
   },
   "keywords": [
     "ng",
     "angular",
     "daterangepicker",
     "advanced",
-    "library"
+    "library",
+    "datepicker",
+    "ngx",
+    "ngx-custom-daterangepicker",
+    "ngx-daterangepicker",
+    "ngx-daterangepicker-material",
+    "ngx-material-daterangepicker",
+    "angular2",
+    "angular9",
+    "angular10",
+    "angular11",
+    "angular12",
+    "angular13",
+    "angular14",
+    "angular15",
+    "angular16",
+    "angular17",
+    "angular18",
+    "ng2",
+    "material",
+    "component",
+    "directive",
+    "daterange",
+    "date",
+    "luxon",
+    "picker"
   ],
   "peerDependencies": {
-    "@angular/common": "^17.x",
-    "@angular/core": "^17.x",
-    "@angular/localize": "^17.x",
-    "@angular/material": "^17.x",
-    "@angular/material-moment-adapter": "^17.x",
-    "moment": "^2.x"
+    "@angular/common": "^18.x",
+    "@angular/core": "^18.x",
+    "@angular/localize": "^18.x",
+    "@angular/material": "^18.x",
+    "luxon": "^3.x"
   },
   "dependencies": {
-    "tslib": "^2.6.2"
+    "tslib": "^2.7.0"
   }
 }

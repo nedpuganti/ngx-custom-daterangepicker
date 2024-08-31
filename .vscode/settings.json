@@ -29,7 +29,6 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "window.zoomLevel": 0,
-  "workbench.activityBar.visible": true,
   "workbench.iconTheme": "material-icon-theme",
   "[css]": {
     "editor.defaultFormatter": "vscode.css-language-features"
@@ -52,5 +51,5 @@
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  }
 }

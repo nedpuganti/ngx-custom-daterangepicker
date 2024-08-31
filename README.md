@@ -1,40 +1,95 @@
 # NgxAdvancedDaterangepicker
 
-[![Material Advanced date range picker](screen-1.png)](https://stackblitz.com/github/nedpuganti/ngx-custom-daterangepicker)
-[![Material Advanced date range picker](screen-2.png)](https://stackblitz.com/github/nedpuganti/ngx-custom-daterangepicker)
+`NgxAdvancedDaterangepicker` is an Angular date range picker component with advanced functionality and Material Design support. It allows for easy date range selection with customizable options and is simple to integrate into any Angular project.
 
+![Material Advanced date range picker](screen-1.png)
+![Material Advanced date range picker](screen-2.png)
 
-## It's awesome, but how to use it?
+## Features
 
-As easy as pie.
-Installation: `yarn add ngx-advanced-daterangepicker` or `npm install ngx-advanced-daterangepicker`
-Import `NgxAdvancedDaterangepickerModule`
+- Select predefined date ranges (e.g., today, this week, etc.).
+- Emits date selection events for further customization.
+- Easily integrates with Angular Material.
+
+## Installation
+
+To install `NgxAdvancedDaterangepicker`, you can use either `npm` or `yarn`:
+
+```bash
+# Using npm
+npm install ngx-advanced-daterangepicker
+
+# Using yarn
+yarn add ngx-advanced-daterangepicker
 ```
-<ngx-advanced-daterangepicker
-          [selectDays]="'today'"
-          [isoDateFormat]="true"
-          (on-change)="getDateSelection($event)"
-        ></ngx-advanced-daterangepicker>
-```
 
-Install Packages:
-```
+Additionally, install the required Angular Material and Luxon dependencies:
+
+```bash
 ng add @angular/material
-
-npm i moment
-npm i @angular/material-moment-adapter
+npm install luxon @angular/material-luxon-adapter
 ```
 
+## Usage
 
-Add styles:
+### Import the Module
+
+In your `app.module.ts`, import the `NgxAdvancedDaterangepickerModule`:
+
+```typescript
+import { NgxAdvancedDaterangepickerModule } from 'ngx-advanced-daterangepicker';
+
+@NgModule({
+  declarations: [/* Your Components */],
+  imports: [
+    /* Other Modules */
+    NgxAdvancedDaterangepickerModule
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+### Add Styles
+
+Include the Angular Material theme in your global styles (e.g., `styles.scss`):
+
 ```scss
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "@angular/material/prebuilt-themes/azure-blue.css";
 ```
 
-##
-https://indepth.dev/create-your-standalone-angular-library-in-10-minutes/
+### Add Component to Template
 
+In your Angular component template, use the `ngx-advanced-daterangepicker` component:
+
+```html
+<ngx-advanced-daterangepicker
+  [selectDays]="'today'"
+  (on-change)="getDateSelection($event)"
+></ngx-advanced-daterangepicker>
+```
+
+### Handling Date Selection
+
+In your component `.ts` file, implement the `getDateSelection` method to handle date changes:
+
+```typescript
+export class MyComponent {
+  getDateSelection(event: any) {
+    console.log('Selected Date Range:', event);
+    // Handle the selected date range here
+  }
+}
+```
+
+## Development
+
+To build and serve the project locally, you can run the following commands:
+
+```bash
+# Build the library
 ng build --watch ngx-advanced-daterangepicker
 
-$ ng serve
-$ firefox http://localhost:4200
+# Serve the demo application
+ng serve ngx-custom-daterangepicker
+```

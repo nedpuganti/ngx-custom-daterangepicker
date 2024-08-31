@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 
 import {
+  DateFormatTypes,
   DateSelection,
   DateSelectionDisplayTypes,
   DateSelectionTypes,
@@ -10,201 +11,182 @@ import {
   SelectionTypes
 } from './ngx-advanced-daterangepicker.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class NgxAdvancedDaterangepickerService {
+  public getStartAndEndOfDay(startDate: Date, endDate: Date): DateSelection {
+    return {
+      startDate: DateTime.fromJSDate(startDate).startOf('day').toJSDate(),
+      endDate: DateTime.fromJSDate(endDate).endOf('day').toJSDate()
+    };
+  }
+
   public getSelectedDate(type: DateSelectionTypes | null, showLastEndOf: boolean): DateSelection {
-    const selectedDate: DateSelection = {
-      startDate: '',
-      endDate: ''
+    const startOfToday: DateTime = DateTime.now().startOf('day');
+    const endOfToday: DateTime = DateTime.now().endOf('day');
+
+    const selectedDate:
+      | DateSelection
+      | {
+          startDate: DateTime;
+          endDate: DateTime;
+        } = {
+      startDate: startOfToday,
+      endDate: endOfToday
     };
 
-    const startOfToday = moment().startOf('day').format();
-    const endOfToday = moment().endOf('day').format();
-
-    if (type === DateSelectionTypes.TODAY) {
-      selectedDate.startDate = startOfToday;
-      selectedDate.endDate = endOfToday;
-    }
-
-    if (type === DateSelectionTypes.YESTERDAY) {
-      const startOfYesterday = moment().subtract(1, 'd').startOf('day').format();
-      const endOfYesterday = moment().subtract(1, 'd').endOf('day').format();
-
-      selectedDate.startDate = startOfYesterday;
-      selectedDate.endDate = endOfYesterday;
-    }
-
-    if (type === DateSelectionTypes.THIS_WEEK) {
-      const startOfWeek = moment().startOf('week').format();
-
-      selectedDate.startDate = startOfWeek;
-
-      if (showLastEndOf) {
-        selectedDate.endDate = moment().endOf('week').format();
-      } else {
+    switch (type) {
+      case DateSelectionTypes.TODAY:
+        selectedDate.startDate = startOfToday;
         selectedDate.endDate = endOfToday;
-      }
-    }
+        break;
 
-    if (type === DateSelectionTypes.LAST_WEEK) {
-      const startOfLastWeek = moment().subtract(1, 'w').startOf('week').format();
-      const endOfLastWeek = moment().subtract(1, 'w').endOf('week').format();
+      case DateSelectionTypes.YESTERDAY:
+        selectedDate.startDate = DateTime.now().minus({ days: 1 }).startOf('day');
+        selectedDate.endDate = DateTime.now().minus({ days: 1 }).endOf('day');
+        break;
 
-      selectedDate.startDate = startOfLastWeek;
-      selectedDate.endDate = endOfLastWeek;
-    }
+      case DateSelectionTypes.THIS_WEEK:
+        selectedDate.startDate = DateTime.now().startOf('week').minus({ days: 1 });
+        selectedDate.endDate = showLastEndOf ? DateTime.now().endOf('week').minus({ days: 1 }) : endOfToday;
+        break;
 
-    if (type === DateSelectionTypes.NEXT_WEEK) {
-      const startOfNextWeek = moment().add(1, 'w').startOf('week').format();
-      const endOfNextWeek = moment().add(1, 'w').endOf('week').format();
+      case DateSelectionTypes.LAST_WEEK:
+        selectedDate.startDate = DateTime.now().minus({ weeks: 1 }).startOf('week').minus({ days: 1 });
+        selectedDate.endDate = DateTime.now().minus({ weeks: 1 }).endOf('week').minus({ days: 1 });
+        break;
 
-      selectedDate.startDate = startOfNextWeek;
-      selectedDate.endDate = endOfNextWeek;
-    }
+      case DateSelectionTypes.NEXT_WEEK:
+        selectedDate.startDate = DateTime.now().plus({ weeks: 1 }).startOf('week');
+        selectedDate.endDate = DateTime.now().plus({ weeks: 1 }).endOf('week');
+        break;
 
-    if (type === DateSelectionTypes.LAST_7_DAYS) {
-      const last7Days = moment().subtract(6, 'd').startOf('day').format();
-
-      selectedDate.startDate = last7Days;
-      selectedDate.endDate = endOfToday;
-    }
-
-    if (type === DateSelectionTypes.NEXT_7_DAYS) {
-      const next7Days = moment().add(6, 'd').endOf('day').format();
-
-      selectedDate.startDate = startOfToday;
-      selectedDate.endDate = next7Days;
-    }
-
-    if (type === DateSelectionTypes.THIS_MONTH) {
-      const startOfMonth = moment().startOf('month').format();
-
-      selectedDate.startDate = startOfMonth;
-
-      if (showLastEndOf) {
-        selectedDate.endDate = moment().endOf('month').format();
-      } else {
+      case DateSelectionTypes.LAST_7_DAYS:
+        selectedDate.startDate = DateTime.now().minus({ days: 6 }).startOf('day');
         selectedDate.endDate = endOfToday;
-      }
-    }
+        break;
 
-    if (type === DateSelectionTypes.LAST_MONTH) {
-      const startOfLastMonth = moment().subtract(1, 'M').startOf('month').format();
-      const endOfLastMonth = moment().subtract(1, 'M').endOf('month').format();
+      case DateSelectionTypes.NEXT_7_DAYS:
+        selectedDate.startDate = startOfToday;
+        selectedDate.endDate = DateTime.now().plus({ days: 6 }).endOf('day');
+        break;
 
-      selectedDate.startDate = startOfLastMonth;
-      selectedDate.endDate = endOfLastMonth;
-    }
+      case DateSelectionTypes.THIS_MONTH:
+        selectedDate.startDate = DateTime.now().startOf('month');
+        selectedDate.endDate = showLastEndOf ? DateTime.now().endOf('month') : endOfToday;
+        break;
 
-    if (type === DateSelectionTypes.NEXT_MONTH) {
-      const startOfNextMonth = moment().add(1, 'M').startOf('month').format();
-      const endOfNextMonth = moment().add(1, 'M').endOf('month').format();
+      case DateSelectionTypes.LAST_MONTH:
+        selectedDate.startDate = DateTime.now().minus({ months: 1 }).startOf('month');
+        selectedDate.endDate = DateTime.now().minus({ months: 1 }).endOf('month');
+        break;
 
-      selectedDate.startDate = startOfNextMonth;
-      selectedDate.endDate = endOfNextMonth;
-    }
+      case DateSelectionTypes.NEXT_MONTH:
+        selectedDate.startDate = DateTime.now().plus({ months: 1 }).startOf('month');
+        selectedDate.endDate = DateTime.now().plus({ months: 1 }).endOf('month');
+        break;
 
-    if (type === DateSelectionTypes.LAST_30_DAYS) {
-      const last30Days = moment().subtract(29, 'd').startOf('day').format();
-
-      selectedDate.startDate = last30Days;
-      selectedDate.endDate = endOfToday;
-    }
-
-    if (type === DateSelectionTypes.NEXT_30_DAYS) {
-      const next30Days = moment().add(29, 'd').endOf('day').format();
-
-      selectedDate.startDate = startOfToday;
-      selectedDate.endDate = next30Days;
-    }
-
-    if (type === DateSelectionTypes.THIS_QUARTER) {
-      const startOfQuarter = moment().startOf('quarter').format();
-
-      selectedDate.startDate = startOfQuarter;
-
-      if (showLastEndOf) {
-        selectedDate.endDate = moment().endOf('quarter').format();
-      } else {
+      case DateSelectionTypes.LAST_30_DAYS:
+        selectedDate.startDate = DateTime.now().minus({ days: 29 }).startOf('day');
         selectedDate.endDate = endOfToday;
-      }
-    }
+        break;
 
-    if (type === DateSelectionTypes.LAST_QUARTER) {
-      const startOfLastQuarter = moment().subtract(1, 'Q').startOf('quarter').format();
-      const endOfLastQuarter = moment().subtract(1, 'Q').endOf('quarter').format();
+      case DateSelectionTypes.NEXT_30_DAYS:
+        selectedDate.startDate = startOfToday;
+        selectedDate.endDate = DateTime.now().plus({ days: 29 }).endOf('day');
+        break;
 
-      selectedDate.startDate = startOfLastQuarter;
-      selectedDate.endDate = endOfLastQuarter;
-    }
+      case DateSelectionTypes.THIS_QUARTER:
+        selectedDate.startDate = DateTime.now().startOf('quarter');
+        selectedDate.endDate = showLastEndOf ? DateTime.now().endOf('quarter') : endOfToday;
+        break;
 
-    if (type === DateSelectionTypes.NEXT_QUARTER) {
-      const startOfNextQuarter = moment().add(1, 'Q').startOf('quarter').format();
-      const endOfNextQuarter = moment().add(1, 'Q').endOf('quarter').format();
+      case DateSelectionTypes.LAST_QUARTER:
+        selectedDate.startDate = DateTime.now().minus({ quarters: 1 }).startOf('quarter');
+        selectedDate.endDate = DateTime.now().minus({ quarters: 1 }).endOf('quarter');
+        break;
 
-      selectedDate.startDate = startOfNextQuarter;
-      selectedDate.endDate = endOfNextQuarter;
-    }
+      case DateSelectionTypes.NEXT_QUARTER:
+        selectedDate.startDate = DateTime.now().plus({ quarters: 1 }).startOf('quarter');
+        selectedDate.endDate = DateTime.now().plus({ quarters: 1 }).endOf('quarter');
+        break;
 
-    if (type === DateSelectionTypes.LAST_90_DAYS) {
-      const last90Days = moment().subtract(89, 'd').startOf('day').format();
-
-      selectedDate.startDate = last90Days;
-      selectedDate.endDate = endOfToday;
-    }
-
-    if (type === DateSelectionTypes.NEXT_90_DAYS) {
-      const next90Days = moment().add(89, 'd').endOf('day').format();
-
-      selectedDate.startDate = startOfToday;
-      selectedDate.endDate = next90Days;
-    }
-
-    if (type === DateSelectionTypes.LAST_12_MONTHS) {
-      const last12Months = moment().subtract(12, 'M').startOf('day').format();
-
-      selectedDate.startDate = last12Months;
-      selectedDate.endDate = endOfToday;
-    }
-
-    if (type === DateSelectionTypes.NEXT_12_MONTHS) {
-      const next12Months = moment().add(12, 'M').endOf('day').format();
-
-      selectedDate.startDate = startOfToday;
-      selectedDate.endDate = next12Months;
-    }
-
-    if (type === DateSelectionTypes.LAST_YEAR) {
-      const startOfLastYear = moment().subtract(1, 'y').startOf('year').format();
-      const endOfLastYear = moment().subtract(1, 'y').endOf('year').format();
-
-      selectedDate.startDate = startOfLastYear;
-      selectedDate.endDate = endOfLastYear;
-    }
-
-    if (type === DateSelectionTypes.NEXT_YEAR) {
-      const startOfNextYear = moment().add(1, 'y').startOf('year').format();
-      const endOfNextYear = moment().add(1, 'y').endOf('year').format();
-
-      selectedDate.startDate = startOfNextYear;
-      selectedDate.endDate = endOfNextYear;
-    }
-
-    if (type === DateSelectionTypes.THIS_YEAR) {
-      const startOfYear = moment().startOf('y').format();
-
-      selectedDate.startDate = startOfYear;
-
-      if (showLastEndOf) {
-        selectedDate.endDate = moment().endOf('y').format();
-      } else {
+      case DateSelectionTypes.LAST_90_DAYS:
+        selectedDate.startDate = DateTime.now().minus({ days: 89 }).startOf('day');
         selectedDate.endDate = endOfToday;
-      }
+        break;
+
+      case DateSelectionTypes.NEXT_90_DAYS:
+        selectedDate.startDate = startOfToday;
+        selectedDate.endDate = DateTime.now().plus({ days: 89 }).endOf('day');
+        break;
+
+      case DateSelectionTypes.LAST_12_MONTHS:
+        selectedDate.startDate = DateTime.now().minus({ months: 12 }).startOf('day');
+        selectedDate.endDate = endOfToday;
+        break;
+
+      case DateSelectionTypes.NEXT_12_MONTHS:
+        selectedDate.startDate = startOfToday;
+        selectedDate.endDate = DateTime.now().plus({ months: 12 }).endOf('day');
+        break;
+
+      case DateSelectionTypes.LAST_YEAR:
+        selectedDate.startDate = DateTime.now().minus({ years: 1 }).startOf('year');
+        selectedDate.endDate = DateTime.now().minus({ years: 1 }).endOf('year');
+        break;
+
+      case DateSelectionTypes.NEXT_YEAR:
+        selectedDate.startDate = DateTime.now().plus({ years: 1 }).startOf('year');
+        selectedDate.endDate = DateTime.now().plus({ years: 1 }).endOf('year');
+        break;
+
+      case DateSelectionTypes.THIS_YEAR:
+        selectedDate.startDate = DateTime.now().startOf('year');
+        selectedDate.endDate = showLastEndOf ? DateTime.now().endOf('year') : endOfToday;
+        break;
+
+      default:
+        break;
     }
 
-    return selectedDate;
+    return {
+      startDate: selectedDate.startDate.toJSDate(),
+      endDate: selectedDate.endDate.toJSDate()
+    } as DateSelection;
+  }
+
+  public formatSelectedDate(
+    selectedDate: DateSelection,
+    dateFormatType: DateFormatTypes | null,
+    customDateFormat: string
+  ): DateSelection<Date | string | null> {
+    const { startDate, endDate } = {
+      startDate: DateTime.fromJSDate(selectedDate.startDate as Date),
+      endDate: DateTime.fromJSDate(selectedDate.endDate as Date)
+    };
+
+    switch (dateFormatType) {
+      case 'ISO':
+        return {
+          startDate: startDate.toUTC().toISO(),
+          endDate: endDate.toUTC().toISO()
+        };
+      case 'JS':
+        return {
+          startDate: startDate.toJSDate(),
+          endDate: endDate.toJSDate()
+        };
+      case 'CUSTOM':
+        return {
+          startDate: startDate.toFormat(customDateFormat),
+          endDate: endDate.toFormat(customDateFormat)
+        };
+      default:
+        return {
+          startDate: startDate.toFormat("yyyy-MM-dd'T'HH:mm:ssZZ"),
+          endDate: endDate.toFormat("yyyy-MM-dd'T'HH:mm:ssZZ")
+        };
+    }
   }
 
   public getSelectionTypes(): Array<SelectionTypes> {

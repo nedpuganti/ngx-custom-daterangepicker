@@ -1,57 +1,69 @@
-<div class="advanced-daterangepicker-button">
-  <button mat-stroked-button (click)="openDateSelectDialog(showDatePicker)">
-    <div class="button-text-block">
-      <div>
-        <span class="text-muted">{{ appliedType.displayName }} </span>
+@if (inlineDatePicker()) {
+  <ng-container *ngTemplateOutlet="showDatePicker" />
+} @else {
+  <div class="advanced-daterangepicker-button">
+    <button mat-stroked-button (click)="openDateSelectDialog(showDatePicker)">
+      <div class="button-text-block">
+        <div>
+          <span class="text-muted">{{ appliedType().displayName }} </span>
+        </div>
+        <div class="daterangepicker-flex">
+          @let appliedDateSelection = appliedDate();
+          {{ appliedDateSelection.startDate | date }} -
+          {{ appliedDateSelection.endDate | date }}
+          <span class="material-icons"> keyboard_arrow_down </span>
+        </div>
       </div>
-      <div class="daterangepicker-flex">
-        {{ appliedDate.startDate | date }} -
-        {{ appliedDate.endDate | date }}
-        <span class="material-icons">
-          keyboard_arrow_down
-        </span>
-      </div>
-    </div>
-  </button>
-</div>
+    </button>
+  </div>
+}
 
 <ng-template #showDatePicker>
+  @let isCalendarHidden = hideCalendar();
   <div class="advanced-daterangepicker">
     <div class="daterangepicker-calendar-box">
-      <div class="calendar-buttons-list" [ngClass]="hideCalendar ? 'calendar-buttons-list-only': ''">
-        @for (type of selectionTypes; track trackByIdentity($index, type)) {
-          <button mat-button [color]="type?.isActive ? primaryColor : ''" (click)="onDaySelect(type.type)">
-            {{type.displayName}} {{type?.displayText}}
-          </button>
+      <div class="calendar-buttons-list" [ngClass]="isCalendarHidden ? 'calendar-buttons-list-only' : ''">
+        @for (type of selectionTypes(); track trackByIdentity($index, type)) {
+          @if(type?.isActive) {
+            <button mat-flat-button (click)="onDaySelect(type.type)">
+              {{ type.displayName }} {{ type?.displayText }}
+            </button>
+          } @else {
+            <button mat-button (click)="onDaySelect(type.type)">
+              {{ type.displayName }} {{ type?.displayText }}
+            </button>
+          }
         }
       </div>
-      @if (!hideCalendar) {
+      @if (!isCalendarHidden) {
         <div class="calendar-divider">
           <mat-divider [vertical]="true" />
         </div>
         <div class="calendar-selection">
           <div class="p-16">
-            <span class="text-muted">{{ selectedType.displayName }}</span>
-            <h3 class="f-w-500 m-b-0">
-              {{ selectedDate.startDate | date }} - {{ selectedDate.endDate | date }}
-            </h3>
+            @let selectedDateSelection = selectedDate();
+            <span class="text-muted">{{ selectedType().displayName }}</span>
+            <h3 class="f-w-500 m-b-0">{{ selectedDateSelection.startDate | date }} - {{ selectedDateSelection.endDate | date }}</h3>
           </div>
           <mat-divider />
           <div class="inlineCalendarContainer">
-            <mat-calendar [selected]="selectedDateSelected" [maxDate]="!showNext && !showLastEndOf ? today : ''"
-              (selectedChange)="inlineRangeChange($event)" />
+            <mat-calendar
+              #calendar
+              [selected]="selectedDateSelected()"
+              [maxDate]="maxDate()"
+              (selectedChange)="inlineRangeChange($event)"
+            />
           </div>
         </div>
       }
     </div>
-    @if (!hideCalendar) {
-      <mat-divider />
-      <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [color]="primaryColor" (click)="dateSelected()" class="m-r-8">
-          Apply
-        </button>
-      </mat-dialog-actions>
+    <ng-content #timePicker />
+    @if (!isButtonVisible()) {
+        <mat-divider />
+        <mat-dialog-actions align="end">
+          <button mat-button mat-dialog-close>Cancel</button>
+          <button mat-flat-button (click)="dateSelected()" class="m-r-8">Apply</button>
+        </mat-dialog-actions>
     }
   </div>
 </ng-template>

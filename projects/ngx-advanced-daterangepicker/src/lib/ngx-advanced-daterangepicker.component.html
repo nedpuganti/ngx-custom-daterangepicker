@@ -22,7 +22,7 @@
   @let isCalendarHidden = hideCalendar();
   <div class="advanced-daterangepicker">
     <div class="daterangepicker-calendar-box">
-      <div class="calendar-buttons-list" [ngClass]="isCalendarHidden ? 'calendar-buttons-list-only' : ''">
+      <div class="calendar-buttons-list" [class]="isCalendarHidden ? 'calendar-buttons-list-only' : ''">
         @for (type of selectionTypes(); track trackByIdentity($index, type)) {
           @if(type?.isActive) {
             <button mat-flat-button (click)="onDaySelect(type.type)">

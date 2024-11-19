@@ -1,4 +1,4 @@
-import { DatePipe, NgClass, NgTemplateOutlet } from '@angular/common';
+import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -45,20 +45,12 @@ import { NgxAdvancedDaterangepickerService } from './ngx-advanced-daterangepicke
   selector: 'ngx-advanced-daterangepicker',
   templateUrl: './ngx-advanced-daterangepicker.component.html',
   styleUrls: ['./ngx-advanced-daterangepicker.component.scss'],
-  standalone: true,
-  imports: [DatePipe, MatButton, MatCalendar, MatDivider, MatDialogClose, MatDialogActions, NgClass, NgTemplateOutlet],
+  imports: [DatePipe, MatButton, MatCalendar, MatDivider, MatDialogClose, MatDialogActions, NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS },
-    {
-      provide: DateAdapter,
-      useClass: NativeDateAdapter,
-      deps: [MAT_DATE_LOCALE]
-    },
-    {
-      provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
-      useClass: DefaultMatCalendarRangeStrategy
-    },
+    { provide: DateAdapter, useClass: NativeDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_RANGE_SELECTION_STRATEGY, useClass: DefaultMatCalendarRangeStrategy },
     DefaultMatCalendarRangeStrategy,
     MatRangeDateSelectionModel,
     NgxAdvancedDaterangepickerService
@@ -67,10 +59,10 @@ import { NgxAdvancedDaterangepickerService } from './ngx-advanced-daterangepicke
 export class NgxAdvancedDaterangepickerComponent implements OnInit, OnChanges {
   private dRef!: MatDialogRef<unknown>;
 
-  private dialog: MatDialog = inject(MatDialog);
-  private readonly selectionModel: MatRangeDateSelectionModel<Date> = inject(MatRangeDateSelectionModel<Date>);
-  private readonly selectionStrategy: DefaultMatCalendarRangeStrategy<Date> = inject(DefaultMatCalendarRangeStrategy<Date>);
-  private dateRangePickerService = inject(NgxAdvancedDaterangepickerService);
+  readonly dialog: MatDialog = inject(MatDialog);
+  readonly selectionModel: MatRangeDateSelectionModel<Date> = inject(MatRangeDateSelectionModel<Date>);
+  readonly selectionStrategy: DefaultMatCalendarRangeStrategy<Date> = inject(DefaultMatCalendarRangeStrategy<Date>);
+  readonly dateRangePickerService: NgxAdvancedDaterangepickerService = inject(NgxAdvancedDaterangepickerService);
 
   calendar: Signal<MatCalendar<Date> | undefined> = viewChild('calendar', { read: MatCalendar });
 
@@ -118,37 +110,18 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit, OnChanges {
    */
   showLastEndOfThisPeriod: InputSignal<boolean> = input<boolean>(false);
 
-  customDate: ModelSignal<DateSelection> = model<DateSelection>({
-    startDate: null,
-    endDate: null
-  });
+  customDate: ModelSignal<DateSelection> = model<DateSelection>({ startDate: null, endDate: null });
 
   dateRangeSelected: OutputEmitterRef<DateSelection<Date | string | null>> = output<DateSelection>();
   appliedTypeSelected: OutputEmitterRef<SelectionTypes> = output<SelectionTypes>();
 
   public selectedDateSelected: WritableSignal<DateRange<Date | null>> = signal(new DateRange<Date>(null, null));
 
-  public selectedDate: WritableSignal<DateSelection> = signal({
-    startDate: null,
-    endDate: null
-  });
-  public selectedType: WritableSignal<SelectionTypes> = signal({
-    type: null,
-    displayName: null,
-    mode: null,
-    displayType: null
-  });
+  public selectedDate: WritableSignal<DateSelection> = signal({ startDate: null, endDate: null });
+  public selectedType: WritableSignal<SelectionTypes> = signal({ type: null, displayName: null, mode: null, displayType: null });
 
-  public appliedDate: WritableSignal<DateSelection> = signal({
-    startDate: null,
-    endDate: null
-  });
-  public appliedType: WritableSignal<SelectionTypes> = signal({
-    type: null,
-    displayName: null,
-    mode: null,
-    displayType: null
-  });
+  public appliedDate: WritableSignal<DateSelection> = signal({ startDate: null, endDate: null });
+  public appliedType: WritableSignal<SelectionTypes> = signal({ type: null, displayName: null, mode: null, displayType: null });
 
   public selectionTypes: WritableSignal<SelectionTypes[]> = signal([]);
 
@@ -218,10 +191,7 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit, OnChanges {
         this.customDate.set(structuredClone(this.selectedDate()));
       }
     } else {
-      this.customDate.set({
-        startDate: null,
-        endDate: null
-      });
+      this.customDate.set({ startDate: null, endDate: null });
 
       this.selectedDate.set(this.dateRangePickerService.getSelectedDate(type, this.showLastEndOfThisPeriod()));
     }

@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatDivider } from '@angular/material/divider';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MatToolbar } from '@angular/material/toolbar';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -205,7 +204,6 @@ import {
       }
     `
   ],
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
@@ -219,7 +217,6 @@ import {
     MatRadioGroup,
     MatRadioButton,
     MatToolbar,
-    MatDivider,
     DatePipe,
     NgxAdvancedDaterangepickerComponent
   ]

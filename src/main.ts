@@ -2,7 +2,8 @@ import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  provideExperimentalZonelessChangeDetection,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
   signal,
   ViewEncapsulation,
   WritableSignal
@@ -14,8 +15,6 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MatToolbar } from '@angular/material/toolbar';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   DateFormatTypes,
   DateSelection,
@@ -265,5 +264,5 @@ export class AppComponent {
 }
 
 bootstrapApplication(AppComponent, {
-  providers: [provideAnimations(), provideExperimentalZonelessChangeDetection(), provideAnimationsAsync(), provideAnimationsAsync()]
+  providers: [provideZonelessChangeDetection(), provideBrowserGlobalErrorListeners()]
 }).catch((err) => console.error(err));

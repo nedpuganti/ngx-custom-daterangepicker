@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  provideExperimentalZonelessChangeDetection,
+  provideZonelessChangeDetection,
   signal,
   ViewEncapsulation,
   WritableSignal
@@ -265,5 +265,5 @@ export class AppComponent {
 }
 
 bootstrapApplication(AppComponent, {
-  providers: [provideAnimations(), provideExperimentalZonelessChangeDetection(), provideAnimationsAsync(), provideAnimationsAsync()]
+  providers: [provideAnimations(), provideZonelessChangeDetection(), provideAnimationsAsync(), provideAnimationsAsync()]
 }).catch((err) => console.error(err));

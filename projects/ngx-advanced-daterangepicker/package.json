@@ -2,7 +2,7 @@
   "name": "ngx-advanced-daterangepicker",
   "description": "Custom date range picker for Angular",
   "license": "MIT",
-  "version": "20.2.0",
+  "version": "21.0.0",
   "author": "Naren",
   "publishConfig": {
     "access": "public"
@@ -35,6 +35,8 @@
     "angular17",
     "angular18",
     "angular19",
+    "angular20",
+    "angular21",
     "ng2",
     "material",
     "component",
@@ -45,10 +47,10 @@
     "picker"
   ],
   "peerDependencies": {
-    "@angular/common": "^20.x",
-    "@angular/core": "^20.x",
-    "@angular/localize": "^20.x",
-    "@angular/material": "^20.x",
+    "@angular/common": "^21.x",
+    "@angular/core": "^21.x",
+    "@angular/localize": "^21.x",
+    "@angular/material": "^21.x",
     "luxon": "^3.7.x"
   },
   "dependencies": {

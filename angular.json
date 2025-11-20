@@ -15,7 +15,7 @@
       "prefix": "ncd",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "options": {
             "allowedCommonJsDependencies": ["luxon"],
             "outputPath": {
@@ -102,7 +102,7 @@
       "prefix": "nad",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/ngx-advanced-daterangepicker/ng-package.json"
           },

@@ -1,6 +1,7 @@
-import { TemplateRef } from '@angular/core';
+import { Signal, TemplateRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
+import { MatCalendar } from '@angular/material/datepicker';
 import { DateTime } from 'luxon';
 import { of } from 'rxjs';
 
@@ -136,5 +137,36 @@ describe('NgxAdvancedDaterangepickerComponent', () => {
     component.reset();
     expect(component.selectedDate()).toEqual(appliedDate);
     expect(component.selectedType()).toEqual(appliedType);
+  });
+
+  it('should keep an incomplete calendar range without navigating to a null date', () => {
+    const goToDateInView = jest.fn();
+    const startDate = DateTime.now().startOf('day').toJSDate();
+
+    component.calendar = (() =>
+      ({
+        _goToDateInView: goToDateInView
+      }) as unknown as MatCalendar<Date>) as Signal<MatCalendar<Date> | undefined>;
+
+    component.updateCalendarSelectedRange(startDate, null);
+
+    expect(component.selectedDateSelected().start).toEqual(startDate);
+    expect(component.selectedDateSelected().end).toBeNull();
+    expect(goToDateInView).toHaveBeenCalledWith(startDate, 'month');
+  });
+
+  it('should not navigate the calendar when the selected range has no dates', () => {
+    const goToDateInView = jest.fn();
+
+    component.calendar = (() =>
+      ({
+        _goToDateInView: goToDateInView
+      }) as unknown as MatCalendar<Date>) as Signal<MatCalendar<Date> | undefined>;
+
+    component.updateCalendarSelectedRange(null, null);
+
+    expect(component.selectedDateSelected().start).toBeNull();
+    expect(component.selectedDateSelected().end).toBeNull();
+    expect(goToDateInView).not.toHaveBeenCalled();
   });
 });

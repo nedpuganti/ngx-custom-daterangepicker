@@ -210,13 +210,17 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit, OnChanges {
     this.updateCalendarSelectedRange(startDate as Date, endDate as Date);
   }
 
-  inlineRangeChange(date: Date): void {
+  inlineRangeChange(date: Date | null): void {
+    if (!date) {
+      return;
+    }
+
     const selection: DateRange<Date> = this.selectionModel.selection;
 
     const updatedDateRange: DateRange<Date> = this.selectionStrategy.selectionFinished(date, selection);
 
     this.selectionModel.updateSelection(updatedDateRange, this);
-    this.updateCalendarSelectedRange(updatedDateRange.start as Date, updatedDateRange.end as Date);
+    this.updateCalendarSelectedRange(updatedDateRange.start, updatedDateRange.end);
 
     if (this.selectionModel.isComplete()) {
       const { startDate, endDate } = this.dateRangePickerService.getStartAndEndOfDay(
@@ -228,9 +232,13 @@ export class NgxAdvancedDaterangepickerComponent implements OnInit, OnChanges {
     }
   }
 
-  updateCalendarSelectedRange(startDate: Date, endDate: Date): void {
+  updateCalendarSelectedRange(startDate: Date | null, endDate: Date | null): void {
     this.selectedDateSelected.set(new DateRange<Date | null>(startDate, endDate));
-    this.calendar()?._goToDateInView(endDate, 'month');
+
+    const activeDate: Date | null = endDate ?? startDate;
+    if (activeDate) {
+      this.calendar()?._goToDateInView(activeDate, 'month');
+    }
   }
 
   findSelection(type: DateSelectionTypes | null): void {

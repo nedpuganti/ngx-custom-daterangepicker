@@ -10,6 +10,12 @@
   "arrowParens": "always",
   "overrides": [
     {
+      "files": "*.html",
+      "options": {
+        "parser": "angular"
+      }
+    },
+    {
       "files": "package*.json",
       "options": {
         "printWidth": 1000

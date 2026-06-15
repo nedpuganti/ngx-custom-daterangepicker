@@ -49,7 +49,7 @@ describe('NgxAdvancedDaterangepickerService', () => {
       expect(result.endDate).toEqual(DateTime.fromJSDate(endDate).endOf('day').toJSDate());
     });
 
-    it('should handle invalid dates', () => {
+    it('should handle valid current dates', () => {
       const startDate = new Date();
       const endDate = new Date();
       const result: DateSelection = service.getStartAndEndOfDay(startDate, endDate);
@@ -59,7 +59,7 @@ describe('NgxAdvancedDaterangepickerService', () => {
     });
   });
 
-  describe('getStartAndEndOfDay', () => {
+  describe('getSelectedDate', () => {
     it("should return today's date range", () => {
       const result = service.getSelectedDate(DateSelectionTypes.TODAY, false);
       const startOfToday = DateTime.now().startOf('day').toJSDate();

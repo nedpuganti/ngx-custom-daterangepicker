@@ -203,7 +203,6 @@ import {
       }
     `
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
     MatCard,

@@ -46,7 +46,6 @@ import { NgxAdvancedDaterangepickerService } from './ngx-advanced-daterangepicke
   templateUrl: './ngx-advanced-daterangepicker.component.html',
   styleUrls: ['./ngx-advanced-daterangepicker.component.scss'],
   imports: [DatePipe, MatButton, MatCalendar, MatDivider, MatDialogClose, MatDialogActions, NgTemplateOutlet],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS },
     { provide: DateAdapter, useClass: NativeDateAdapter, deps: [MAT_DATE_LOCALE] },

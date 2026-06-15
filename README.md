@@ -30,6 +30,10 @@ ng add @angular/material
 npm install luxon @angular/material-luxon-adapter
 ```
 
+## Release Notes
+
+See [CHANGELOG.md](CHANGELOG.md) for release notes and Angular compatibility from Angular 9 onward.
+
 ## Usage
 
 ### Import the Module
